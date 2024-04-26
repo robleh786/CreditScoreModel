@@ -17,4 +17,6 @@ urlpatterns = [
     path('logout', views.logoutuser, name='logout'),
     path('profile', views.viewprofile, name='view-profile'),
     path('edit', views.editprofile, name='edit-profile'),
+    path('edit-photo', views.editprofileimage, name='edit-photo'),
+    path('credit-history', views.credhist, name='credit-history'),
 ]

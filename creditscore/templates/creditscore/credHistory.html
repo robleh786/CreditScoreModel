@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Credit Score History</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #19212D;
+      color: #ffffff;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .graph-container {
+      background: hsl(217, 55%, 18%);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      max-width: 800px; /* Wider graph container */
+      width: 100%;
+      margin: 20px;
+    }
+
+    canvas {
+      background-color: #fff;
+    }
+
+    .statistics {
+      text-align: center;
+      margin-top: 20px;
+      color: #fff; /* Ensure text is visible on the dark background */
+      font-size: 18px; /* Larger font size for visibility */
+      display: flex;
+      justify-content: space-between; /* Space out the lowest and highest score */
+      width: 100%;
+      max-width: 800px; /* Align with the graph width */
+      box-sizing: border-box; /* Include padding in width */
+      padding: 0 20px; /* Padding to not stick to the edges */
+    }
+
+    /* Additional styling for the lowest and highest scores */
+    .statistics p {
+      background: hsl(217, 25%, 35%);
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .back-button-container {
+    position: fixed; /* Position relative to the viewport */
+    top: 20px; /* Distance from the top of the viewport */
+    left: 20px; /* Distance from the left of the viewport */
+    z-index: 9999; /* Ensure the button is above other content */
+}
+
+.back-button {
+    text-decoration: none;
+    color: #FFF;
+    background-color: #333;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.back-button i {
+    margin-right: 8px;
+}
+  </style>
+</head>
+<body>
+    <div class="back-button-container">
+        <a href="{% url 'view-profile' %}" class="back-button"><i class="fa fa-arrow-left"></i> Back</a>
+    </div>
+
+<div class="graph-container">
+  <canvas id="creditScoreChart"></canvas>
+</div>
+
+<div class="statistics">
+  <p id="lowest-score"></p>
+  <p id="highest-score"></p>
+</div>
+
+{% block content %}
+  {{ dates|json_script:"dates-data" }}
+  {{ scores|json_script:"scores-data" }}
+{% endblock %}
+
+<script>
+  const dates = JSON.parse(document.getElementById('dates-data').textContent);
+  const scores = JSON.parse(document.getElementById('scores-data').textContent);
+
+  // Calculating the lowest and highest credit score
+  const lowestScore = Math.min(...scores);
+  const highestScore = Math.max(...scores);
+
+  // Displaying the lowest and highest credit score
+  document.getElementById('lowest-score').textContent = `Lowest Credit Score: ${lowestScore}`;
+  document.getElementById('highest-score').textContent = `Highest Credit Score: ${highestScore}`;
+  
+  const ctx = document.getElementById('creditScoreChart').getContext('2d');
+  
+  const creditScoreChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: dates, 
+      datasets: [{
+        label: 'Credit Score History',
+        data: scores, 
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        borderWidth: 2,
+        pointBackgroundColor: 'rgba(255, 99, 132, 1)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(255, 99, 132, 1)'
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      aspectRatio: 2, /* Adjusted for a better fit */
+      scales: {
+        y: {
+          beginAtZero: false,
+          suggestedMin: 100,
+          suggestedMax: 999
+        },
+        x: {
+          autoSkip: true,
+          maxTicksLimit: 10 // Adjust the number of ticks on the x-axis as needed
+        }
+      },
+      plugins: {
+        legend: {
+          display: true,
+          labels: {
+            color: 'rgb(255, 99, 132)'
+          }
+        }
+      }
+    }
+  });
+</script>
+
+</body>
+</html>

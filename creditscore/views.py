@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .forms import CreditCardDataForm,CreditApplicationForm,UserProfileForm
+from .forms import CreditCardDataForm,CreditApplicationForm,UserProfileForm,ProfileImageForm
 from .machinlearning import predict_credit_score;
 import pandas as pd
 from django.contrib.auth import authenticate,login,logout
@@ -183,7 +183,7 @@ def viewprofile(request):
     return render(request,'creditscore/userProfile.html',context)
 
 
-@login_required
+@login_required(login_url='loginpage')
 def editprofile(request):
     user = request.user
     profile = user.profile  # Assumes a OneToOne relation exists
@@ -219,3 +219,35 @@ def editprofile(request):
     }
     
     return render(request, 'creditscore/editProfile.html', context)
+
+
+@login_required(login_url='loginpage')
+def editprofileimage(request):
+    user = request.user
+    profile = user.profile  
+    
+    if request.method == 'POST':
+        form = ProfileImageForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Profile image updated successfully!')
+            return redirect('view-profile')  
+    else:
+        form = ProfileImageForm(instance=profile)
+
+    context = {'form': form, 'profile': profile}
+    return render(request, 'creditscore/editPhoto.html', context)
+
+
+def credhist(request):
+    credit_score_results = CreditScoreResult.objects.filter(user=request.user).order_by('created')
+
+    dates = [result.created.strftime('%Y-%m-%d') for result in credit_score_results]
+    scores = [result.Score for result in credit_score_results]
+
+    # Pass the data to the template
+    context = {
+        'dates': dates,
+        'scores': scores,
+    }
+    return render(request, 'creditscore/credHistory.html', context)

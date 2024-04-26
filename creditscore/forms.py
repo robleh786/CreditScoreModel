@@ -41,3 +41,9 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ['bank_balance', 'current_bank', 'phone_number', 'profile_image']
+
+
+class ProfileImageForm(ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['profile_image']

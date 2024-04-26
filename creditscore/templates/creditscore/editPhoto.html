@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Profile Image</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+</head>
+<body>
+    <div class="back-button-container">
+        <a href="{% url 'view-profile' %}" class="back-button"><i class="fa fa-arrow-left"></i> Back</a>
+    </div>
+
+<div class="update-container">
+  <h1 class="heading"><i class="fa fa-image"></i> Profile Photo</h1>
+
+  <div class="current-profile-image-container">
+    <img src="{{ profile.profile_image.url }}" alt="Current Profile Image" class="current-profile-image">
+  </div>
+
+ 
+  <form method="post" enctype="multipart/form-data" class="update-form">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="id_profile_image"><i class="fa fa-upload"></i> Change Profile Image:</label>
+        {{ form.profile_image }}
+    </div>
+    <button type="submit" class="btn update-btn">Update Profile Image</button>
+  </form>
+</div>
+
+<style>
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #19212D; 
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  
+  .update-container {
+    background: hsl(217, 55%, 18%);
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    width: 400px; /* Set a fixed width */
+    text-align: center; /* Center content */
+  }
+
+ 
+  .heading {
+    color: #ffffff;
+    font-size: 24px;
+    margin-bottom: 30px; 
+    text-align: center; 
+  }
+
+ 
+  .current-profile-image-container {
+    margin-bottom: 20px;
+  }
+
+
+  .current-profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 4px solid #2C384A;
+    object-fit: cover;
+    display: block; 
+    margin: 0 auto 20px; 
+  }
+
+  /* Form styles */
+  .update-form .form-group {
+    margin-bottom: 20px;
+  }
+
+  .update-form label {
+    color: #fff;
+    font-weight: bold; /* Make the label bold */
+    display: block; /* Make label a block to add space */
+    margin-bottom: 10px; /* Space between label and input */
+  }
+
+  .update-form input[type="file"] {
+    padding: 10px;
+    background-color: #2C384A;
+    border-radius: 4px;
+    color: #fff;
+  }
+
+  /* Style for the button */
+  .btn.update-btn {
+    background-color: hsl(217, 25%, 35%);
+    color: #FFF;
+    border: none;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 20px;
+    width: 100%;
+    text-align: center;
+    font-size: 16px; /* Increase font size */
+    margin-top: 20px; /* Add space above the button */
+  }
+
+  .btn.update-btn:hover {
+    background-color: #919191; /* Darker shade on hover */
+  }
+
+  .btn i {
+    margin-right: 8px; /* Space between icon and text */
+  }
+
+  .back-button-container {
+    position: fixed; /* Position relative to the viewport */
+    top: 20px; /* Distance from the top of the viewport */
+    left: 20px; /* Distance from the left of the viewport */
+    z-index: 9999; /* Ensure the button is above other content */
+}
+
+.back-button {
+    text-decoration: none;
+    color: #FFF;
+    background-color: #333;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.back-button i {
+    margin-right: 8px;
+}
+  
+</style>
+
+</body>
+</html>
