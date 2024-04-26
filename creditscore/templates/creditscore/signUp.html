@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Signup</title>
+    <!-- Your CSS link here -->
+</head>
+<body>
+<div class="center">
+    <h1>Signup</h1>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div class="form-container">
+            <div class="form-field">
+                {{ form.username.label_tag }} {{ form.username }}
+            </div>
+            <div class="form-field">
+                {{ form.first_name.label_tag }} {{ form.first_name }}
+            </div>
+            <div class="form-field">
+                {{ form.last_name.label_tag }} {{ form.last_name }}
+            </div>
+            <div class="form-field">
+                {{ form.email.label_tag }} {{ form.email }}
+            </div>
+            <div class="form-field">
+                {{ form.password1.label_tag }} {{ form.password1 }}
+            </div>
+            <div class="form-field">
+                {{ form.password2.label_tag }} {{ form.password2 }}
+            </div>
+            <input type="submit" value="register">
+        </div>
+    </form>
+    <p><a href="{% url 'loginpage' %}">Already registered?</a></p>
+</div>
+</body>
+</html>
+
+<style>
+/* Import the Google font */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+
+/* Reset and font settings */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: linear-gradient(#374358, #0b1628);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.center {
+  background: rgb(22, 30, 40);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
+  color: #fff;
+  max-width: 400px;
+  width: 100%;
+}
+
+.center h1 {
+  text-align: center;
+  color: #e9f4fb;
+  margin-bottom: 20px;
+}
+
+.center form {
+  display: flex;
+  flex-direction: column;
+}
+
+.center form p {
+  color: #a6a6a6;
+  margin: 10px 0;
+}
+
+/* Style the form fields */
+form p {
+  margin-bottom: 15px;
+}
+
+input[type='text'],
+input[type='password'],
+input[type='submit'] {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+input[type='email'] {
+  background-color: #2c3e50;
+  color: #fff;
+  /* Other styling consistent with text and password fields */
+}
+
+
+input[type='text'],
+input[type='password'] {
+  background-color: #2c3e50;
+  color: #fff;
+}
+
+input[type='submit'] {
+  background-color: #2691d9;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s;
+}
+
+input[type='submit']:hover {
+  background-color: #1a6fa5;
+}
+
+/* Link to login page */
+.center a {
+  color: #2691d9;
+  text-decoration: none;
+}
+
+.center a:hover {
+  text-decoration: underline;
+}
+
+/* Validation messages */
+.validation-messages {
+  background-color: #ffcccc;
+  color: red;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+.form-container {
+  background: #2c3e50;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+/* Style individual form fields */
+.form-field {
+  margin-bottom: 15px; /* Space between fields */
+}
+
+.form-field input {
+  width: 100%; /* Full width of the container */
+  padding: 10px;
+  margin-bottom: 5px; /* Space after the input field */
+  border: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+  background-color: #34495e; /* Slightly lighter than container for contrast */
+  color: #fff; /* White text */
+}
+</style>

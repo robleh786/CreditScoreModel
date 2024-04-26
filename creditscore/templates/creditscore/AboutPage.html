@@ -1,0 +1,234 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> 
+    {% block content %}
+    <title>About Credit</title>
+    <style>
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: url("{% static 'images/about-background.png' %}") no-repeat center center;
+            background-size: cover;
+            position: relative;
+            color: hsl(218, 55%, 10%);
+            height: 400px; /* Adjusted height */
+            width: 100%;
+        }
+    
+        .header-text {
+            position: absolute;
+            left: calc(50% - 280px); /* Moves the circle 100px more to the left from the center */
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #005288;
+            border-radius: 50%;
+            width: 300px; /* Width of the circular overlay */
+            height: 300px; /* Height of the circular overlay */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+            font-size: 1.5em;
+            line-height: 1.4;
+            font-family: Arial, sans-serif;
+            z-index: 10;
+        }
+        .value-prop {
+            display: flex;
+            justify-content: space-around;
+            align-items: start;
+            flex-wrap: wrap;
+            gap: 10px; /* Reduced spacing between columns */
+            background-color: hsl(218, 55%, 10%); /* A light grey background for the icons container */
+            padding: 20px 0; /* Padding at the top and bottom of the container */
+        }
+
+
+        .value-prop .column {
+            flex: 1;
+            max-width: 250px;
+            padding: 15px;
+            margin: 0 10px; /* This will ensure even further reduced space between columns if needed */
+            background-color: hsl(217, 45%, 30%); /* If you want each column to have a white background */
+            border-radius: 10px; /* Optional: to give each column rounded corners */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: to add a subtle shadow to each column */
+        }
+        .value-prop .icon {
+            font-size: 3em; /* Smaller font size for icons */
+            color: #e84855; /* Adjust the color to match your design */
+            margin-bottom: 15px; /* Less space below the icon */
+        }
+        .our-story h2 {
+            font-size: 2em; /* Smaller font size for the heading */
+        }
+        .our-story p, .value-prop p {
+            font-size: 0.9em; /* Smaller font size for paragraph text */
+        }
+        .gender-diversity-section {
+            background-color: hsl(217, 76%, 8%); /* Or any color you'd like for the background */
+            padding: 40px 20px; /* Adjust padding to match the layout of your design */
+            text-align: center; /* Center the text */
+        }
+
+        .gender-diversity-content {
+            max-width: 800px; /* Adjust the width as needed */
+            margin: 0 auto; /* This centers the content block */
+        }
+        .gender-diversity-logo {
+            width: 150px; /* Adjust the width as desired to make the logo smaller */
+            height: auto; /* This will maintain the aspect ratio of the logo */
+            margin-bottom: 20px; /* Space between the logo and the heading */
+            display: block; /* This ensures the logo is centered if it's an inline element */
+            margin-left: auto; /* These two margin settings center the logo horizontally */
+            margin-right: auto;
+        }
+
+        .gender-diversity-section h2 {
+            font-size: 2.5em; /* Adjust the font size as needed */
+            color: #ffffff; /* Dark grey color for the heading */
+            margin-bottom: 20px; /* Space between the heading and the paragraph */
+        }
+
+        .gender-diversity-section p {
+            font-size: 1em; /* Adjust the font size as needed */
+            color: #ffffff; /* Medium grey color for the text */
+            line-height: 1.6; /* Adjust line height for readability */
+        }
+    
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .header-container {
+                height: 250px;
+            }
+            .header-text {
+                width: 200px; /* Smaller circle for smaller screens */
+                height: 200px; /* Smaller circle for smaller screens */
+                font-size: 1.2em; /* Smaller font size for smaller screens */
+                /* Adjust the left value if necessary for smaller screens */
+                left: calc(50% - 80px); /* Moves the circle slightly more to the left from the center */
+            }
+        }
+    </style>
+    
+    
+</head>
+
+<body>
+    <header class="header-container">
+        <div class="header-text">
+            Bringing simplicity and humanity to credit cards
+        </div>
+    </header>
+    <div class="our-story">
+        <h2>Our story</h2>
+        <p>
+            We launched our inaugural credit card in 2003 and have since evolved into one of the top ten card providers in the UK.
+            
+            Since the beginning, our focus has been on empowering individuals to succeed with credit.
+            This commitment is reflected in our pioneering features such as the QuickCheck eligibility checker and our efforts to foster positive change within the financial sector.
+            As a result, we are the sole card provider to receive a 4-star rating for our credit card from Fairbankingp>
+        
+        <div class="value-prop">
+            <!-- First Column -->
+            <div class="column">
+                <div class="icon">👍</div> <!-- Replace with your icon -->
+                <h3>Simple</h3>
+                <p>From knowing if you'll be accepted before applying to loans or major fincial descions, we are you at you aid, 
+                    to help know were you stand in your credit world.
+                </p>
+            </div>
+            
+            <!-- Second Column -->
+            <div class="column">
+                <div class="icon">📑</div> <!-- Replace with your icon -->
+                <h3>Clear</h3>
+                <p>We talk straight without confusing jargon. Keeping it clear and simple, so you know exactly what to expect from us and
+                    what can we help you with. we are very transparent as well.
+                </p>
+            </div>
+            
+            <!-- Third Column -->
+            <div class="column">
+                <div class="icon">💬</div> <!-- Replace with your icon -->
+                <h3>Supportive</h3>
+                <p>It’s our business to help people succeed with credit. We do this by putting customers at the heart of everything we do and
+                    we care about your future and how we can help.</p>
+            </div>
+        </div>
+    </div>
+    <div class="gender-diversity-section">
+        <div class="gender-diversity-content">
+            <img src="{% static 'images/equility-logo.jpg' %}" alt="Women in Finance Logo" class="gender-diversity-logo">
+            <h2>Our commitment to gender diversity</h2>
+            <p>
+                At Credit Smart, we're proudly committed to advancing a diverse and inclusive culture, where every voice is heard and matters. We believe that everyone has a unique point of view to share, and that only by harnessing the power of our collective wisdom can we truly create the best experiences for our associates and customers.
+                <br><br>
+                Credit Smart has always been passionate about advancing gender parity in the workplace. It goes hand in hand with our core value of ‘doing the right thing’. We know inclusive organisations are more successful and vibrant places to work and we want our talent pools to be as strong and diverse as possible.
+                <br><br>
+                We’ve been signatories of the Women in Finance Charter for six years. It’s designed to support the government’s aspiration to see gender balance at all levels across financial services firms.
+            </p>
+        </div>
+    </div>
+
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .our-story {
+            background-color: hsl(217, 55%, 15%); /* Light gray background, adjust if needed */
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .our-story h2 {
+            color: #ffffff; /* Dark grey color for the heading */
+            font-size: 2.5em; /* Large font size for the heading */
+        }
+        .our-story p {
+            color: #ffffff; /* Medium grey color for the text */
+            line-height: 1.6;
+            margin-bottom: 40px; /* Space below the paragraph */
+        }
+        .value-prop {
+            display: flex;
+            justify-content: space-around;
+            align-items: start;
+            flex-wrap: wrap; /* Ensure it wraps on smaller screens */
+            gap: 15px; /* Spacing between columns */
+        }
+        .value-prop .column {
+            flex: 1;
+            max-width: 300px; /* Maximum width for each column */
+            padding: 20px;
+        }
+        .value-prop .icon {
+            font-size: 4em; /* Large font size for icons */
+            color: #e84855; /* Adjust the color to match your design */
+            margin-bottom: 20px; /* Space below the icon */
+        }
+        .value-prop h3 {
+            font-size: 1.5em; /* Medium font size for sub-headings */
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+        .value-prop p {
+            color: #ffffff;
+        }
+    </style>
+
+{% endblock %}
+</body>
+</html>

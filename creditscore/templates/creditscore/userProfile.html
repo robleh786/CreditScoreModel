@@ -1,0 +1,183 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+</head>
+<body>
+
+  <div class="profile-container">
+
+    <div class="profile-card">
+      <!-- If profile image exists show it, otherwise show default image -->
+      <img src="{{ user_profile.profile_image.url }}" alt="Profile Image" class="profile-image">
+      <button class="update-photo-btn">UPDATE PHOTO</button>
+      <h2>{{ user.get_full_name }}</h2>
+      <p>{{ user_profile.get_credit_history_display }}</p> <!-- Assuming you have a method to display credit history -->
+      <div class="details">
+        <!-- Assuming you have methods or fields for these scores -->
+        <p><strong>credit score</strong>300</p>
+        <p><strong>credit scores</strong>400</p>
+        <p><strong>credit scores</strong>200</p>
+      </div>
+      <button>VIEW PUBLIC PROFILE</button>
+    </div>
+
+    <div class="account-info">
+      <h3>ACCOUNT</h3>
+      <div class="form-group">
+        <label>First Name</label>
+        <p id="first-name">{{ user.first_name }}</p>
+      </div>
+      <div class="form-group">
+        <label>Last Name</label>
+        <p id="last-name">{{ user.last_name }}</p>
+      </div>
+      <div class="form-group">
+        <label>Current Bank</label>
+        <p id="current-bank">{{ user_profile.current_bank }}</p>
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <p id="phone">{{ user_profile.phone_number }}</p>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <p id="email">{{ user.email }}</p>
+      </div>
+      <div class="form-group">
+        <label>Current Balance</label>
+        <p id="balance">{{ user_profile.bank_balance }}</p>
+      </div>
+      <a href="{% url 'edit-profile' %}" class="edit-profile-link">EDIT</a>
+    </div>
+
+  </div>
+
+</body>
+</html>
+<style>
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #19212D; /* Dark blue background */
+    background: linear-gradient(to bottom right, #2C384A, #19212D); /* Gradient background */
+}
+
+.profile-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+
+.profile-card {
+    background: hsl(217, 55%, 18%);
+    padding: 20px;
+    height: 600px;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    text-align: center;
+    border-radius: 8px;
+}
+
+.profile-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: block;
+    border: 4px solid #2C384A; /* Dark blue border for image */
+    position: relative;
+}
+
+.profile-card h2, .profile-card p, .account-info h3 {
+    margin: 10px 0;
+    color: #ffffff; /* White text for better visibility */
+}
+
+.details p {
+    font-size: 0.9em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ffffff; /* White bottom border */
+    padding: 10px 0;
+}
+
+button {
+    background-color: hsl(217, 25%, 35%);
+    color: #FFF;
+    border: none;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+    margin: 20px auto; /* Center the button */
+}
+
+button:hover {
+    background-color: #919191; /* Darker shade on hover */
+}
+
+.account-info {
+    background: hsl(218, 55%, 10%);
+    padding: 20px;
+    width: 500px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border-radius: 8px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #fff9f9; /* Light color for label */
+}
+
+.form-group p {
+    color: #fff; /* White color for text */
+    background: #2c4566; /* Background color for display info */
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px; /* Space between entries */
+}
+
+.update-photo-btn {
+    background-color: hsl(217, 34%, 32%);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    margin-top: 10px;
+    font-size: 0.8em;
+    border-radius: 20px;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto; /* Center the button */
+}
+.edit-profile-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: hsl(217, 25%, 35%);
+    color: #FFF;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 20px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.edit-profile-link:hover {
+    background-color: #919191;
+}
+</style>
+</html>

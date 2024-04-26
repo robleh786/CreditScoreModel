@@ -1,0 +1,322 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Credit Score Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
+    
+</head>
+<style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+  
+    .dashboard-container {
+        display: flex;
+        max-width: 1200px;
+        margin: auto;
+        background-color: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        
+    }
+  
+    .credit-score-info {
+        width: 30%;
+        padding: 20px;
+        border-right: 2px solid #ccc;
+        background-color: #ffffff; /* Change to match your design */
+        height: auto;
+        align-self: start; /* Align to the top */
+    }
+    .credit-score-display {
+        background-color: #00008B; /* Dark blue background */
+        color: #FFFFFF; /* White text */
+        font-size: 108px; /* Large, bold font size */
+        font-weight: bold; /* Bold font weight */
+        padding: 10px; /* Padding around the text */
+        border-radius: 5px; /* Rounded corners */
+        margin-left: 20px; /* Add some space between the gauge and the score */
+    }
+  
+  
+    .credit-score-range h2,
+    .credit-check h2 {
+        margin: 0 0 10px;
+        color: #333;
+        font-size: 24px;
+    }
+  
+    .credit-score-range ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .gauge-container {
+        flex: 1;
+        display: flex;
+        justify-content: left;
+        height: 90%;
+    }
+  
+    .credit-score-range ul li {
+        font-size: 18px;
+        padding: 12px 10px;
+        margin-bottom: 10px;
+        font-weight: bold;
+        position: relative; /* Add position relative for absolute positioning of pseudo-elements */
+        padding-left: 30px; /* Add padding to leave space for the colored indicator */
+        line-height: 1.4; /* Adjust line height for better readability */
+        background-color: #fff; /* Background color */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle depth effect */
+    }
+    .credit-score-range ul li::before {
+        content: ''; /* Required for pseudo-elements to show */
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 20px; /* Width of the colored box */
+        border-radius: 4px 0 0 4px; /* Rounded corners on the left */
+        z-index: 0; /* Ensure it's behind the text if needed */
+    }
+  
+    .excellent::before { background-color: #4CAF50; } /* Green */
+    .good::before { background-color: #c3f327; } /* Yellow */
+    .fair::before { background-color: #FFC107; } /* Amber */
+    .poor::before { background-color: #FF9800; } /* Orange */
+    .very-poor::before { background-color: #f44336; } /* Red */
+  
+    .credit-check {
+        width: 70%;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+  
+    .credit-check p {
+        margin-bottom: 30px;
+    }
+  
+    button {
+        padding: 15px 25px;
+        font-size: 18px;
+        color: #fff;
+        background-color: #4CAF50;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+  
+    button:hover {
+        background-color: #43A047;
+    }
+  
+    /* Color indicators for the credit score ranges */
+    .excellent { border-left-color: #4CAF50; } /* Green */
+    .good { border-left-color: #8BC34A; } /* Light Green */
+    .fair { border-left-color: #FFEB3B; } /* Amber */
+    .poor { border-left-color: #FFC107; } /* Orange */
+    .very-poor { border-left-color: #f44336; } /* Red */
+  
+    #gauge {
+        width: 500px; /* Set a width to make the gauge larger */
+        height: 250px; /* Set a height to make the gauge larger */
+    }
+    .highlight {
+        background-color: #e6ffe6; /* Light green background for highlight */
+        border-left-color: #4CAF50 !important; /* Ensure the border color is green */
+        box-shadow: 0 0 10px #4CAF50; /* Optional: Add a glow or shadow effect */
+    }
+    .button-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+  
+    .button-container button {
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        padding: 10px 20px;
+        margin: 0 5px; /* Small space between buttons */
+        transition: background-color 0.3s, box-shadow 0.3s;
+        outline: none; /* Remove the outline */
+    }
+  
+    /* Specific styles for save and back buttons */
+    .button-save {
+        background-color: #28a745;
+        color: #ffffff;
+        box-shadow: 0 4px 8px rgba(40, 167, 69, 0.2);
+    }
+  
+    .button-back {
+        background-color: #17a2b8;
+        color: #ffffff;
+        box-shadow: 0 4px 8px rgba(23, 162, 184, 0.2);
+    }
+    .messages {
+        margin: 20px;
+        padding: 10px;
+        background-color: #f4f4f4;
+    }
+
+    .message {
+        padding: 5px;
+        margin-bottom: 5px;
+    }
+
+    .message.success {
+        color: #28a745;
+    }
+
+    .message.error {
+        color: #dc3545;
+    }
+  
+  
+    /* Adjustments for smaller screens */
+    @media (max-width: 768px) {
+        .dashboard-container {
+            flex-direction: column;
+        }
+  
+        .credit-score-info {
+            width: 100%;
+            border-right: none;
+            border-bottom: 2px solid #ccc;
+        }
+  
+        .credit-check {
+            width: 100%;
+        }
+    }
+  
+  
+</style>
+<body>
+    <div class="dashboard-container">
+        <!-- Messages display area -->
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div{% if message.tags %} class="message {{ message.tags }}"{% endif %}>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="credit-score-info">
+            <div class="credit-score-range">
+                <h2>Where you stand</h2>
+                <ul>
+                    <li class="excellent">EXCELLENT: 720 - 850</li>
+                    <li class="good">GOOD: 690 - 719</li>
+                    <li class="fair">FAIR: 630 - 689</li>
+                    <li class="poor">POOR: 350 - 629</li>
+                    <li class="very-poor">VERY POOR: 300 - 349</li>
+                </ul>
+            </div>
+        </div>
+        <div class="credit-check">
+            <div class="gauge-container">
+                <canvas id="gauge"></canvas>
+            </div>
+            <div class="credit-score-display">
+                <span>{{ credit_score }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="button-container">
+        <form action="{% url 'saveCredit1' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="credit_score" value="{{ credit_score }}">
+            <button type="submit" class="save">Save Score</button>
+        </form>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Gauge configuration
+            var opts = {
+                angle: 0, // The span of the gauge arc
+                lineWidth: 0.28, // The line thickness
+                radiusScale: 1, // Relative radius
+                pointer: {
+                    length: 0.4, // Relative to gauge radius
+                    strokeWidth: 0.035, // The thickness
+                    color: '#000000' // Fill color
+                },
+                limitMax: false, // If false, max value increases automatically if value > maxValue
+                limitMin: false, // If true, the min value of the gauge will be fixed
+                colorStart: '#FF0000', // Red
+                colorStop: '#008000',  // Green
+                gradientType: 1,
+                strokeColor: '#E0E0E0', // Grey background
+                generateGradient: true,
+                highDpiSupport: true,
+                staticZones: [
+                    {strokeStyle: "#F03E3E", min: 0, max: 333}, // Red from 1 to 333
+                    {strokeStyle: "#FFDD00", min: 333, max: 666}, // Yellow from 334 to 666
+                    {strokeStyle: "#30B32D", min: 666, max: 1000}  // Green from 667 to 1000
+                ],
+                staticLabels: {
+                    font: "10px sans-serif", // Specifies font
+                    labels: [1, 250, 500, 750, 1000], // Print labels at these values
+                    color: "#000000", // Optional: Label text color
+                    fractionDigits: 0 // Optional: Numerical precision. 0=round off.
+                }
+            };
+
+            // Select the canvas element and create the gauge
+            var target = document.getElementById('gauge'); // Match the ID here
+            var gauge = new Gauge(document.getElementById('gauge')).setOptions(opts);
+            gauge.maxValue = 1000;
+            gauge.setMinValue(0);
+            gauge.animationSpeed = 32;
+            gauge.set("{{ credit_score }}"); // Set the gauge value to the credit score
+
+            // Credit score ranges
+            const ranges = {
+                excellent: { min: 720, max: 850 },
+                good: { min: 690, max: 719 },
+                fair: { min: 630, max: 689 },
+                poor: { min: 350, max: 629 },
+                'very-poor': { min: 300, max: 349 }
+            };
+
+            // Function to highlight the credit score range
+            function highlightCreditScore(score) {
+                // Remove highlight from all ranges
+                document.querySelectorAll('.credit-score-range ul li').forEach(function(item) {
+                    item.classList.remove('highlight');
+                });
+
+                // Find which range the score belongs to
+                let matchedRange = Object.keys(ranges).find(range => score >= ranges[range].min && score <= ranges[range].max);
+
+                // Add highlight to the matched range
+                if (matchedRange) {
+                    document.querySelector(`.${matchedRange}`).classList.add('highlight');
+                }
+            }
+
+            // Highlight the range for the current score
+            highlightCreditScore("{{ credit_score }}");
+        });
+
+
+    </script>
+        
+</body>
+</html>
