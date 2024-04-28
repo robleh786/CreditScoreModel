@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> <!-- Link to Font Awesome CSS, replace if using a different icon set -->
     <style>
         body {
-            background-color: #071747; /* New background color for the page */
+            background-color: #0d1b31;; /* New background color for the page */
         }
         .hero {
            
@@ -116,7 +116,7 @@
             </li>
             <li><a href="{% url 'logout' %}" role="button">Logout</a></li>
             <li class="profile-icon">
-                <a href="#"><i class="fas fa-user"></i></a>
+                <a href="{% url 'view-profile' %}"><i class="fas fa-user"></i></a>
             </li>
         </ul>
     </nav>
@@ -128,7 +128,7 @@
                 <p>Your free credit score and report</p>
                 <p>Looking for a quick and easy way to check your credit score?<br>
                 Try CreditWise today and get your credit score and report for free.</p>
-                <button>Check my credit score</button>
+                <a href="{% url 'Scorecard' %}" class="credit-score-button">Check my credit score</a>
                 <p>Already have a CreditWise account? <a href="#" style="color: yellow;">Sign in</a></p>
             </div>
             <div class="hero-image"></div>
@@ -156,7 +156,7 @@
         </div>
         <div style="text-align: center; margin-top: 2em;">
             <div class="button-id1">
-                <button>Check my credit score</button>
+                <a href="{% url 'Scorecard' %}" class="credit-score-button">Check my credit score</a>
             </div>
         </div>
     </section>
@@ -170,6 +170,27 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr); /* Three equal columns */
             gap: 1em; /* Gap between cards */
+        }
+        .credit-score-button {
+            display: inline-block;
+            padding: 10px 20px; /* Adjust the padding as needed to match your button style */
+            color: white; /* Your button text color */
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px; /* Adjust the font size as needed */
+            border-radius: 35px; /* Adjust for the desired border-radius */
+            cursor: pointer;
+            transition: background-color 0.3s;
+            background-color: rgb(84, 184, 203);
+            border: none;
+            padding: 1em 2em;
+            font-size: 1.1em;
+            cursor: pointer;
+            color: black; /* To ensure the text is readable on the yellow background */
+        }
+
+        .credit-score-button:hover {
+            background-color: #ffc107;
         }
         .card {
             background-color: white;
@@ -244,7 +265,7 @@
         <div class="credit-payback-info">
             <h2>Want to find out how long it will take to pay off your credit card?</h2>
             <p>Use our Credit Card Payoff Calculator to get a customized plan for your payoff journey.</p>
-            <button>Calculate Payoff</button>
+            <a href="{% url 'Scorecard' %}" class="credit-score-button">Check Payoff</a>
         </div>
     </div>
 </div>
@@ -269,6 +290,43 @@
       <hr>
     </div>
 </div>
+<footer class="footer">
+    <div class="footer-section">
+      <a href="#" class="footer-logo">
+        <!-- Assuming you have an SVG or image file for your logo -->
+        <img src="{% static 'images/credit-counselling-icon.png' %}" alt="Fylo Logo">
+      </a>
+      <address>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+      </address>
+    </div>
+  
+    <div class="footer-section">
+      <div class="footer-contact">
+        <span class="footer-phone">+1-543-123-4567</span>
+        <span class="footer-email">Ra457@student.le.ac.uk</span>
+      </div>
+    </div>
+  
+    <div class="footer-section footer-links">
+      <a href="#">About Us</a>
+      <a href="#">Jobs</a>
+      <a href="#">Press</a>
+      <a href="#">Blog</a>
+    </div>
+  
+    <div class="footer-section">
+      <a href="#">Contact Us</a>
+    </div>
+  
+    <div class="footer-section footer-social">
+      <!-- Use Font Awesome icons or similar for social icons -->
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+    </div>
+  </footer>
+  
 
 <style>
     /* Other styles... */
@@ -277,7 +335,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        background-color: #071747; /* Match the background color of the body */
+        background-color: #0A192F;; /* Match the background color of the body */
         color: white; /* Match the color for text from the screenshot */
         width: 100%; /* Ensure the FAQ takes the full width */
         padding: 2em 0; /* Add some padding at the top and bottom */
@@ -337,7 +395,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #071747; /* Use the same navy blue as the rest of your site */
+            background: #0e223f;; /* Use the same navy blue as the rest of your site */
             padding: 2em 0;
         }
 
@@ -387,6 +445,88 @@
         .credit-payback-info button:hover {
             background-color: #e0a800; /* Darken button on hover */
         }
+        .footer {
+            background-color: #0A192F; /* Adjust the color to match your theme */
+            color: white;
+            display: flex;
+            align-items: center; /* Align items vertically */
+            justify-content: space-between; /* Space out the elements */
+            padding: 3rem 5rem; /* Add padding to the top and bottom, and more on the sides */
+            font-family: 'Open Sans', sans-serif; /* Use a clean, modern font */
+            }
+
+            .footer-logo {
+            display: flex;
+            align-items: center;
+            }
+
+            .footer-logo img {
+                height: 6rem; /* Adjust to fit your logo's size */
+                margin-right: 1rem; /* Space after the logo before the text */
+            }
+
+            .footer-contact {
+            display: flex;
+            align-items: center;
+            }
+
+            .footer-contact a, .footer-contact span {
+            margin-right: 3rem; /* Space between contact info items */
+            white-space: nowrap; /* Prevents wrapping */
+            }
+
+            .footer-links {
+            display: flex;
+            align-items: center;
+            }
+
+            .footer-links a {
+            margin: 0 1rem; /* Space on both sides of the links */
+            }
+
+            .footer-social {
+            display: flex;
+            align-items: center;
+            }
+
+            .footer-social a {
+            margin-left: 2rem; /* Space between social icons */
+            }
+
+            .footer-social i {
+            font-size: 1.5rem; /* Adjust icon size */
+            }
+
+            @media (max-width: 768px) {
+            .footer {
+                flex-direction: column;
+                text-align: center;
+                padding: 1rem;
+            }
+
+            .footer-contact,
+            .footer-links,
+            .footer-social {
+                margin: 1rem 0; /* Add margin above and below for mobile */
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-contact a, .footer-contact span,
+            .footer-links a {
+                margin: 0.5rem 0; /* Stack contact info and links vertically with space in between */
+            }
+
+            .footer-social a {
+                margin: 0.5rem 0; /* Stack social icons vertically with space in between */
+            }
+            }
+
+
+
+
+
+
 
         @media (max-width: 768px) {
             .credit-payback-section {

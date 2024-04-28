@@ -70,16 +70,14 @@ pickle.dump(combiner, open('CreditScore_save1_combiner.pkl', 'wb'))
 train_selected_bin = combiner.transform(train_selected)
 test_bin = combiner.transform(test[train_selected_bin.columns])
 
-# WOE transformation, this replaces the correspong values gotten from the combiner with the equivlent WOE value,
-# a value based on their reltionship with the target variable
 t = toad.transform.WOETransformer()
 train_woe = t.fit_transform(X=train_selected_bin, y=train_selected_bin['label'], exclude=exclude_list)
 test_woe = t.transform(test_bin)
 
-# Combine train and test data
+
 final_data_woe = pd.concat([train_woe, test_woe])
 
-# Save WOE transformer
+
 pickle.dump(t, open('CreditScore_save2_woe_transform.pkl', 'wb'))
 
 # Feature selection after WOE transformation

@@ -77,9 +77,9 @@
 </head>
 <body>
     <nav class="container-fluid">
-        <!-- Logo on the far left -->
-        <img src="{% static 'images/credit-counselling-icon.png' %}" alt="" style="height: 65px;">
-        <!-- Navigation items on the right -->
+        <a href="{% url 'home' %}"> 
+            <img src="{% static 'images/credit-counselling-icon.png' %}" alt="Logo" style="height: 65px;">
+        </a>
         <ul>
             <li><a href="{% url 'Scorecard'%}">Credit Scoreboard</a></li>
             <li><a href="{% url 'creditpay'%}">CreditRepay</a></li>
@@ -95,7 +95,7 @@
             </li>
             <li><a href="{% url 'logout' %}" role="button">Logout</a></li>
             <li class="profile-icon">
-                <a href="#"><i class="fas fa-user"></i></a>
+                <a href="{% url 'view-profile'%}"><i class="fas fa-user"></i></a>
             </li>
         </ul>
     </nav>

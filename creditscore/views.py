@@ -3,7 +3,7 @@ from .forms import CreditCardDataForm,CreditApplicationForm,UserProfileForm,Prof
 from .machinlearning import predict_credit_score;
 import pandas as pd
 from django.contrib.auth import authenticate,login,logout
-from .models import User,CreditScoreResult
+from .models import User,CreditScoreResult,UserProfile
 from django.contrib import messages
 from.machinelearning2 import predict_user_credit_score
 
@@ -118,8 +118,14 @@ def RegisterPage(request):
     if request.method == "POST":
         form = ExtendedUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)  # Create user object but don't save it yet
-            user.save()  # Save the user object to the database
+            user = form.save()  # Save the user object to the database
+            UserProfile.objects.create(  # Create the user profile with default values
+                user=user,
+                bank_balance=0,  
+                current_bank="",  
+                phone_number="",  
+                # The profile image will have the default set in the model
+            )
             login(request, user)  # Log in the user
             return redirect('home')
 
@@ -146,7 +152,7 @@ def save_credit_score(request):
             # Create a new record in the database
             CreditScoreResult.objects.create(user=request.user, Score=credit_score)
             messages.success(request, 'Your credit score has been successfully saved!')
-            return redirect('landingpage')  # Make sure 'landingpage' is defined in your urls.py
+            return redirect('home')  
         except ValueError:
             # If there's an error in converting the credit score to an integer
             messages.error(request, "Invalid credit score provided.")

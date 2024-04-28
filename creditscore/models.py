@@ -63,12 +63,16 @@ class CreditScoreResult(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    bank_balance = models.IntegerField()
-    current_bank = models.CharField(max_length=255)
-    phone_number = models.CharField(max_length=20)
+    bank_balance = models.IntegerField(null=True, blank=True)
+    current_bank = models.CharField(max_length=255, blank=True)
+    phone_number = models.CharField(max_length=20, blank=True)
     profile_image = models.ImageField(upload_to='profile_images/', default='profile_images/default.png') 
 
     def __str__(self):
         return self.user.username
+    
+    
+
+
 
 
