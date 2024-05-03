@@ -21,9 +21,9 @@
       <h2>{{ user.get_full_name }}</h2>
       <p><i class="fa fa-history"></i> {{ user_profile.get_credit_history_display }}</p>
       <div class="details">
-        <p><strong><i class="fa fa-chart-line"></i> Credit Score:</strong> 300</p>
-        <p><strong><i class="fa fa-chart-line"></i> Credit Scores:</strong> 400</p>
-        <p><strong><i class="fa fa-chart-line"></i> Credit Scores:</strong> 200</p>
+        {% for score in recent_scores %}
+          <p><strong><i class="fa fa-chart-line"></i> Credit Score:</strong> <span class="score">{% if score %}{{ score }}{% else %}None{% endif %}</span></p>
+        {% endfor %}
       </div>
       <a href="{% url 'credit-history' %}" class="btn view-public-profile"><i class="fa fa-user"></i> VIEW CREDIT HISTORY</a>
     </div>
@@ -73,6 +73,17 @@ body {
     background-color: #19212D; /* Dark blue background */
     background: linear-gradient(to bottom right, #2C384A, #19212D); /* Gradient background */
 }
+.score {
+      background-color: hsl(217, 34%, 32%);/* Dark blue background similar to the button */
+      color: white; /* White text color */
+      padding: 10px 20px; /* Padding for aesthetics */
+      margin: 5px 0; /* Margin to separate the scores slightly */
+      border-radius: 5px; /* Rounded corners like the button */
+      border: 1px solid #19212D; /* Subtle border color */
+      display: inline-block; /* Make the element inline for better control */
+      width: 40px; /* Fixed width to align all scores nicely */
+      text-align: center; /* Center-align the score text */
+    }
 
 .profile-container {
   display: flex;
@@ -86,7 +97,7 @@ body {
 .profile-card {
     background: hsl(217, 55%, 18%);
     padding: 20px;
-    height: 600px;
+    height: 700px;
     width: 350px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     text-align: center;

@@ -63,4 +63,3 @@ def predict_user_credit_score(type_of_loan, payment_behaviour, total_emi_per_mon
     user_credit_score = regression_model.predict(X_user_sparse)
     
     return user_credit_score[0]
-

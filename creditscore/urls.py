@@ -6,7 +6,7 @@ urlpatterns = [
     path('scorecard', views.creditscore, name="Scorecard"),
     path('', views.landingpage, name="landingpage"),
     path('loginpage', views.loginpage, name="loginpage"),
-    path('form2', views.credit_score_view, name="creditscore"),
+    path('form2', views.credit_application_view, name="loan-test"),
     path('signup', views.RegisterPage, name="signup"),
     path('creditpay', views.creditpay, name="creditpay"),
     path('save-credit', views.save_credit_score, name="saveCredit1"),
@@ -19,4 +19,7 @@ urlpatterns = [
     path('edit', views.editprofile, name='edit-profile'),
     path('edit-photo', views.editprofileimage, name='edit-photo'),
     path('credit-history', views.credhist, name='credit-history'),
+    path('loan-save', views.saveloanscore, name='save-loan'),
+
+
 ]

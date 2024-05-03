@@ -102,9 +102,9 @@
         <img src="{% static 'images/credit-counselling-icon.png' %}" alt="" style="height: 65px;">
         <!-- Navigation items on the right -->
         <ul>
-            <li><a href="{% url 'Scorecard'%}">Credit Scoreboard</a></li>
+            <li><a href="{% url 'Scorecard'%}">Get Credit Score</a></li>
             <li><a href="{% url 'creditpay'%}">CreditRepay</a></li>
-            <li><a href="{% url 'creditscore'%}">Credit M.Score</a></li>
+            <li><a href="{% url 'loan-test'%}">Loan application</a></li>
             <li><a href="{% url 'contact'%}">Contact us</a></li>
             <li class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn">More</a>
@@ -124,12 +124,12 @@
     <main class="container">
         <div class="hero">
             <div class="hero-text">
-                <h1>CreditWise</h1>
+                <h1>CreditSmart</h1>
                 <p>Your free credit score and report</p>
                 <p>Looking for a quick and easy way to check your credit score?<br>
-                Try CreditWise today and get your credit score and report for free.</p>
+                Try CreditSmart today and get your credit score for free.</p>
                 <a href="{% url 'Scorecard' %}" class="credit-score-button">Check my credit score</a>
-                <p>Already have a CreditWise account? <a href="#" style="color: yellow;">Sign in</a></p>
+                <p>Already have a CreditSmart account? <a href="#" style="color: yellow;">Sign in</a></p>
             </div>
             <div class="hero-image"></div>
         </div>
@@ -186,7 +186,7 @@
             padding: 1em 2em;
             font-size: 1.1em;
             cursor: pointer;
-            color: black; /* To ensure the text is readable on the yellow background */
+            color: rgb(7, 7, 7); /* To ensure the text is readable on the yellow background */
         }
 
         .credit-score-button:hover {
@@ -265,7 +265,7 @@
         <div class="credit-payback-info">
             <h2>Want to find out how long it will take to pay off your credit card?</h2>
             <p>Use our Credit Card Payoff Calculator to get a customized plan for your payoff journey.</p>
-            <a href="{% url 'Scorecard' %}" class="credit-score-button">Check Payoff</a>
+            <a href="{% url 'creditpay' %}" class="credit-score-button">Check Payoff</a>
         </div>
     </div>
 </div>

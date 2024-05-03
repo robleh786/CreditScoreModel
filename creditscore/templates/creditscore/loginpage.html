@@ -7,6 +7,25 @@
 </head>
 <link rel="stylesheet" href="{% static 'styles/LoginPage.css' %}">
 <body>
+  <style>
+    .center h1 {
+      color: white; /* Sets the color of the h1 text to white */
+    }
+    .form-container label {
+      color: white; /* Sets the color of form labels to white */
+    }
+    input[type="submit"] {
+      background-color: #007BFF; /* Example blue color; adjust as needed */
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .form-container{
+      margin-top: 20px;
+    }
+  </style>
   <div class="center">
     <h1>Login</h1>
     <!-- Flash messages -->

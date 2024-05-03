@@ -22,6 +22,22 @@
     .attribution a {
       color: hsl(228, 45%, 44%);
     }
+    .logo::after {
+      content: "CREDIT SMART";
+      font-family: 'Raleway', sans-serif; /* This is assuming you want to use Raleway */
+      font-size: 30px; /* Adjust size as needed */
+      color: #4c9bdf; /* White, adjust if needed */
+      padding-right: 10px; /* Adds space between text and logo */
+    }
+    .logo {
+      text-align: center; /* Centers the text and the image */
+    }
+    .logo img {
+      display: block; /* Makes image block-level to force it on a new line */
+      margin: 0 auto; /* Centers the image horizontally */
+      height: 80px; /* Adjust the size as needed */
+    }
+        
   </style>
 
   <link rel="stylesheet" href="{% static 'styles/LandingPage.css' %}">
@@ -31,11 +47,11 @@
 <body>
   <header>
     <div class="navbar">
-      <a href="#" class="logo"><img src="{% static 'images/logo.svg' %}" alt="logo"></a>
+      <a href="#" class="logo"><img src="{% static 'images/credit-counselling-icon.png' %}" alt="logo"></a>
 
       <nav>
         <ul>
-          <li><a href="#">Features</a></li>
+          <li><a href="{% url 'about'%}">About Us</a></li>
           <li><a href="#">Team</a></li>
           <li><a href="{% url 'loginpage'%}">Sign In</a></li>
         </ul>
@@ -62,7 +78,7 @@
         <h3>Get you credit Score AnyWhere</h3>
 
         <p>The ability to use a smartphone, tablet, or computer to access your account means your
-          check your score everywhere.we do not allow our customers to be inhibited by device</p>
+          check your score everywhere. we do not allow our customers to be inhibited by device</p>
       </article>
       <article>
         <img src="{% static 'images/icon-security.svg' %}" alt="icon-security">
@@ -75,10 +91,11 @@
       <article>
         <img src="{% static 'images/icon-collaboration.svg' %}" alt="icon-collaboration">
 
-        <h3>Real-time collaboration</h3>
+        <h3>For the Future</h3>
 
-        <p>Securely share files and folders with friends, family and colleagues for live collaboration.
-          No email attachments required.hajhja naskjasks jsaksjaksj</p>
+        <p> check now and save yourself hassle in the future, Check now
+          to invest in your future
+        </p>
       </article>
       <article>
         <img src="{% static 'images/icon-any-file.svg' %}" alt="icon-any-file">
@@ -94,13 +111,13 @@
       <img src="{% static 'images/illustration-stay-productive.png' %}" alt="illustration-stay-productive">
 
       <div class="text">
-        <h2>Stay productive, wherever you are</h2>
+        <h2>Stay Credit productive, wherever you are</h2>
 
-        <p>Never let location be an issue when accessing your files. Fylo has you covered for all of your file
-          storage needs.</p>
+        <p>Never let current turmoil prevent you from making your credit future Brighter.CreditSmart has
+           everything you need now.</p>
 
-        <p>Securely share files and folders with friends, family and colleagues for live collaboration. No email
-          attachments required.</p>
+        <p>Free sign up and checking , no price, all you need is curisoity and a will
+          to better yourself.</p>
 
         <a href="#">See how Fylo works <img src="{% static 'images/icon-arrow.svg' %}" alt="icon-arrow"></a>
       </div>
@@ -110,40 +127,41 @@
       <img src="{% static 'images/bg-quotes.png' %}" alt="bg-quotes">
 
       <div class="container">
-        <p>Fylo has improved our team productivity by an order of magnitude. Since making the switch our team has
-          become a well-oiled collaboration machine.</p>
+        <p>CreditSmart has changed the way i view money and fincial descsions
+          understanding the impact of every fincial choice and i can't reccomend it enough and would
+        say everyone should try it</p>
 
         <div class="author">
           <img src="{% static 'images/profile-1.jpg' %}" alt="profile-1">
           <div class="person">
-            <p class="name">Satish Patel</p>
-            <p>Founder & CEO, Huddle</p>
+            <p class="name">Nani Khanzada</p>
+            <p>Customer and User</p>
           </div>
         </div>
       </div>
 
       <div class="container">
-        <p>Fylo has improved our team productivity by an order of magnitude. Since making the switch our team has
-          become a well-oiled collaboration machine.</p>
+        <p>CreditSmart has improved my credit future by an order of magnitude. Since making an account my
+          finacial descsions have taken a turn for the best and i want to share this with the world.</p>
 
         <div class="author">
           <img src="{% static 'images/profile-2.jpg' %}" alt="profile-2">
           <div class="person">
-            <p class="name">Bruce McKenzie</p>
-            <p>Founder & CEO, Huddle</p>
+            <p class="name">James Anderson</p>
+            <p>Devloper & COO</p>
           </div>
         </div>
       </div>
 
       <div class="container">
-        <p>Fylo has improved our team productivity by an order of magnitude. Since making the switch our team has
-          become a well-oiled collaboration machine.</p>
+        <p>I created this website in hope that a future generation of people 
+          looking to take that first step into bettering their credit can start.</p>
 
         <div class="author">
-          <img src="{% static 'images/profile-3.jpg' %}" alt="profile-3">
+          <img src="{% static 'images/FACESHOT.png' %}" alt="profile-3">
           <div class="person">
-            <p class="name">Iva Boyd</p>
-            <p>Founder & CEO, Huddle</p>
+            <p class="name">Robleh Abdullahi</p>
+            <p>CEO</p>
           </div>
         </div>
       </div>
@@ -151,7 +169,7 @@
   </main>
 
   <footer>
-    <a href="#" class="logo"><img src="{% static 'images/logo.svg' %}" alt="logo"></a>
+    <a href="#" class="logo"><img src="{% static 'images/credit-counselling-icon.png' %}" alt="logo"></a>
     <div class="navbar-grid">
       <div>
         <img src="{% static 'images/icon-location.svg' %}" alt="location">
@@ -166,7 +184,7 @@
 
         <div>
           <img src="{% static 'images/icon-email.svg' %}" alt="location">
-          <p>example@fylo.com</p>
+          <p>Ra457@student.le.ac.uk</p>
         </div>
       </div>
 

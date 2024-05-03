@@ -59,7 +59,8 @@ train = data_split(data, start=0, end=22500, date_col='ID')
 test = data_split(data, start=22500, end=172792, date_col='ID')
 
 # Feature selection
-train_selected = toad.selection.select(frame=train, target=train['label'], empty=0.7, iv=0.02, corr=1, exclude=exclude_list)
+train_selected = toad.selection.select(frame=train, target=train['label'], empty=0.5, iv=0.07, corr=0.9, exclude=exclude_list)
+
 
 # Combine features, creating a a new combiner model
 combiner = toad.transform.Combiner()

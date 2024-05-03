@@ -71,6 +71,13 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
     
+class LoanResult(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    L_Score=models.IntegerField()
+    created=models.DateTimeField(auto_now_add=True)
+
+
+    
     
 
 

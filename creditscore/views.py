@@ -3,7 +3,7 @@ from .forms import CreditCardDataForm,CreditApplicationForm,UserProfileForm,Prof
 from .machinlearning import predict_credit_score;
 import pandas as pd
 from django.contrib.auth import authenticate,login,logout
-from .models import User,CreditScoreResult,UserProfile
+from .models import User,CreditScoreResult,UserProfile,LoanResult
 from django.contrib import messages
 from.machinelearning2 import predict_user_credit_score
 
@@ -15,33 +15,33 @@ def creditscore(request):
     if request.method == 'POST':
         form = CreditCardDataForm(request.POST)
         if form.is_valid():
-            # Assign form values to user_df
+            # Assign form values to user_df from my machine learnig tools
             user_df = {}
             for field in form.fields:
                 user_df[field] = form.cleaned_data.get(field)
 
-            # Convert user_df to a DataFrame
+            # Convert tha user Df into a datafarme first
             user_df = pd.DataFrame([user_df])
 
-            # Predict the credit score using the ScoreCard model
+            # then use the score card model to predict the credit sccore
             credit_score_result = predict_credit_score(user_df, 'CreditScore_save5_ScoreCard.pkl')
 
             # Extract the credit score value as a single number from the 'CreditScore' column
             credit_score = credit_score_result['CreditScore'].iloc[0]
             credit_score=round(credit_score)
 
-            # Pass the cleaned, single credit score value to the context
+            # Pass the cleaned, single credit score value to the context to be sent to the template
             context = {
                 'form': form,
                 'credit_score': credit_score  # Now just a number, not a Series or DataFrame
             }
             return render(request, 'creditscore/result.html', context)
         else:
-            # If the form is not valid, pass form errors
+            # if there is an error in the forms, pass form errors
             context = {'form': form}
             return render(request, 'creditscore/result.html', context)
     else:
-        # For GET requests, just show the initial form
+        # For GET requests, just show the initial form until vald 
         form = CreditCardDataForm()
         context = {'form': form}
         return render(request, 'creditscore/Scoreboard.html', context)
@@ -73,60 +73,21 @@ def loginpage(request):
     return render(request, "creditscore/loginpage.html")
 
 
-def credit_score_view(request):
-    if request.method == 'POST':
-        form = CreditApplicationForm(request.POST)
-        if form.is_valid():
-            # Extracting the data from the form
-            type_of_loan = form.cleaned_data['type_of_loan']
-            payment_behaviour = form.cleaned_data['payment_behaviour']
-            total_emi_per_month = form.cleaned_data['total_emi_per_month']
-            monthly_inhand_salary = form.cleaned_data['monthly_inhand_salary']
-            num_bank_accounts = form.cleaned_data['num_bank_accounts']
-            num_credit_cards = form.cleaned_data['num_credit_cards']
-            interest_rate = form.cleaned_data['interest_rate']
-            num_of_loan = form.cleaned_data['num_of_loan']
-            delay_from_due_date = form.cleaned_data['delay_from_due_date']
-            num_of_delayed_payment = form.cleaned_data['num_of_delayed_payment']
-            changed_credit_limit = form.cleaned_data['changed_credit_limit']
-            num_credit_inquiries = form.cleaned_data['num_credit_inquiries']
-            credit_mix = form.cleaned_data['credit_mix']
-            outstanding_debt = form.cleaned_data['outstanding_debt']
-            credit_utilization_ratio = form.cleaned_data['credit_utilization_ratio']
-            credit_history_age = form.cleaned_data['credit_history_age']
-            payment_of_min_amount = form.cleaned_data['payment_of_min_amount']
-            amount_invested_monthly = form.cleaned_data['amount_invested_monthly']
-
-            credit_score = predict_user_credit_score(
-                type_of_loan, payment_behaviour, total_emi_per_month, monthly_inhand_salary,
-                num_bank_accounts, num_credit_cards, interest_rate, num_of_loan, delay_from_due_date,
-                num_of_delayed_payment, changed_credit_limit, num_credit_inquiries, credit_mix,
-                outstanding_debt, credit_utilization_ratio, credit_history_age, payment_of_min_amount,
-                amount_invested_monthly
-            )
-
-            # Pass the credit score to the template or return it in the response
-            return render(request, 'creditscore/result2.html', {'credit_score': credit_score})
-    else:
-        form = CreditApplicationForm()
-
-    return render(request, 'creditscore/Test101.html', {'form': form})
-
 
 def RegisterPage(request):
     form = ExtendedUserCreationForm()
     if request.method == "POST":
         form = ExtendedUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()  # Save the user object to the database
-            UserProfile.objects.create(  # Create the user profile with default values
+            user = form.save()  
+            UserProfile.objects.create(  
                 user=user,
                 bank_balance=0,  
                 current_bank="",  
                 phone_number="",  
-                # The profile image will have the default set in the model
+                
             )
-            login(request, user)  # Log in the user
+            login(request, user)  
             return redirect('home')
 
     context = {'form': form}
@@ -178,12 +139,21 @@ def logoutuser(request):
     return redirect('landingpage')
 
 def viewprofile(request):
-    user = request.user  # Get the current logged-in user
-    user_profile = user.profile  # Access the related UserProfile
+    user = request.user
+    user_profile = user.profile
+
+    
+    credit_scores = CreditScoreResult.objects.filter(user=user).order_by('-created')[:3]
+
+   
+    recent_scores = [score.Score for score in credit_scores]
+
+    recent_scores.extend([None] * (3 - len(recent_scores)))
 
     context = {
         'user': user,
         'user_profile': user_profile,
+        'recent_scores': recent_scores,
     }
     
     return render(request,'creditscore/userProfile.html',context)
@@ -236,7 +206,6 @@ def editprofileimage(request):
         form = ProfileImageForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Profile image updated successfully!')
             return redirect('view-profile')  
     else:
         form = ProfileImageForm(instance=profile)
@@ -257,3 +226,58 @@ def credhist(request):
         'scores': scores,
     }
     return render(request, 'creditscore/credHistory.html', context)
+
+
+def saveloanscore(request):
+    if request.method == 'POST':
+        loan_score = request.POST.get('loan_score')
+        if loan_score:
+            try:
+                loan_score = int(loan_score)
+                LoanResult.objects.create(user=request.user, L_Score=loan_score)
+                messages.success(request, 'Your loan score has been saved successfully!')
+                return redirect('home')
+            except ValueError:
+                messages.error(request, 'Invalid score provided.')
+                return redirect('save-loan')
+        else:
+            messages.error(request, 'No score was provided to save.')
+            return redirect('save-loan')
+    else:
+        return render(request, 'creditscore/result2.html')
+
+def credit_application_view(request):
+    if request.method == 'POST':
+        form = CreditApplicationForm(request.POST)
+        if form.is_valid():
+            cleaned_data = form.cleaned_data
+            credit_score = predict_user_credit_score(
+                type_of_loan=cleaned_data['type_of_loan'],
+                payment_behaviour=cleaned_data['payment_behaviour'],
+                total_emi_per_month=cleaned_data['total_emi_per_month'],
+                monthly_inhand_salary=cleaned_data['monthly_inhand_salary'],
+                num_bank_accounts=cleaned_data['num_bank_accounts'],
+                num_credit_cards=cleaned_data['num_credit_cards'],
+                interest_rate=cleaned_data['interest_rate'],
+                num_of_loan=cleaned_data['num_of_loan'],
+                delay_from_due_date=cleaned_data['delay_from_due_date'],
+                num_of_delayed_payment=cleaned_data['num_of_delayed_payment'],
+                changed_credit_limit=cleaned_data['changed_credit_limit'],
+                num_credit_inquiries=cleaned_data['num_credit_inquiries'],
+                credit_mix=cleaned_data['credit_mix'],
+                outstanding_debt=cleaned_data['outstanding_debt'],
+                credit_utilization_ratio=cleaned_data['credit_utilization_ratio'],
+                credit_history_age=cleaned_data['credit_history_age'],
+                payment_of_min_amount=cleaned_data['payment_of_min_amount'],
+                amount_invested_monthly=cleaned_data['amount_invested_monthly'],
+            )
+
+            # Pass the credit score to the template for display
+            return render(request, 'creditscore/result2.html', {'credit_score': credit_score})
+        else:
+            # Return the form with errors
+            return render(request, 'creditscore/Test101.html', {'form': form})
+    else:
+        # If not POST, create a new form instance
+        form = CreditApplicationForm()
+        return render(request, 'creditscore/Test101.html', {'form': form})
