@@ -39,35 +39,33 @@ def assign_credit_level(data, score_column, level_column, level_boundaries):
 def calculate_loss_coverage(data, target_level_column):
     """Calculates loss and coverage for different credit levels."""
 
-    # Calculate loss and coverage for each level
     for level in range(8, 0, -1):
         level_subset = data[data[target_level_column] >= level]
         loss = level_subset['label'].value_counts()[1] / len(level_subset)
         coverage = level_subset['label'].value_counts()[0] / data[data.label == 0].shape[0]
         print(f"Level {level}: Loss is {loss:.4f}; Coverage is {coverage:.4f}")
 
-# Load data
+
 data = pd.read_csv('C:\\Users\\roble\\OneDrive\\Documents\\machine learning tests\\UCI_Credit_Card.csv')
 data['label'] = data['default.payment.next.month']
 data = data.drop(columns=['default.payment.next.month'])
 
-# Exclude certain columns
+
 exclude_list = ['ID', 'label']
 
-# Split data into train and test sets
 train = data_split(data, start=0, end=22500, date_col='ID')
 test = data_split(data, start=22500, end=172792, date_col='ID')
 
-# Feature selection
+
 train_selected = toad.selection.select(frame=train, target=train['label'], empty=0.5, iv=0.07, corr=0.9, exclude=exclude_list)
 
 
-# Combine features, creating a a new combiner model
+
 combiner = toad.transform.Combiner()
 combiner.fit(X=train_selected, y=train_selected['label'], method='chi', min_samples=0.05, exclude=exclude_list)
 pickle.dump(combiner, open('CreditScore_save1_combiner.pkl', 'wb'))
 
-# Transform features, now using that Combiner to transfrom our training and test models.
+
 train_selected_bin = combiner.transform(train_selected)
 test_bin = combiner.transform(test[train_selected_bin.columns])
 
@@ -81,19 +79,19 @@ final_data_woe = pd.concat([train_woe, test_woe])
 
 pickle.dump(t, open('CreditScore_save2_woe_transform.pkl', 'wb'))
 
-# Feature selection after WOE transformation
+
 features_use = [feat for feat in final_data_woe.columns if feat not in exclude_list]
 
-# Calculate Information Value
-df_iv = toad.quality(final_data_woe[features_use + ['label']], 'label', iv_only=True)
-# ... (your existing code)
 
-# Logistic Regression
+df_iv = toad.quality(final_data_woe[features_use + ['label']], 'label', iv_only=True)
+
+
+
 lr = LogisticRegression(class_weight='balanced')
 lr.fit(train_woe[features_use], train_woe['label'])
 probs_lr = lr.predict_proba(test_woe[features_use])[:, 1]
 
-# Calculate and print evaluation metrics
+
 precision, recall, f1, accuracy, balanced_accuracy = calculate_evaluation_metrics(test_woe['label'], probs_lr)
 print(f'Precision: {precision:.4f}')
 print(f'Recall: {recall:.4f}')
@@ -116,7 +114,7 @@ card = toad.ScoreCard(
 card.fit(train_woe[features_use], train_woe['label'])
 pickle.dump(card, open('CreditScore_save5_ScoreCard.pkl', 'wb'))
 
-# Export ScoreCard information
+
 keys = list(card.export().keys())
 score_card_df = pd.DataFrame()
 
@@ -132,7 +130,6 @@ for n in keys:
 score_card_df = pd.concat(score_card_dfs, ignore_index=True)
 score_card_df.to_csv('CreditScore_save6_score_card_df.csv', index=False)
 
-# Visualize Credit Score distribution
 if 'CreditScore' in final_data_woe.columns:
     w = 40
     n = math.ceil((final_data_woe['CreditScore'].max() - final_data_woe['CreditScore'].min()) / w)
@@ -143,16 +140,16 @@ if 'CreditScore' in final_data_woe.columns:
     plt.title('Credit Score Distribution: Test Set', size=15)
     plt.show()
 
-    # Assign Credit Score levels and analyze loss coverage
+  
     assign_credit_level(final_data_woe, score_column='CreditScore', level_column='CreditScore_level',
                         level_boundaries=[250, 300, 400, 500, 580, 630, 690, 730, 1000])
 
     calculate_loss_coverage(final_data_woe, target_level_column='CreditScore_level')
 
-    # Save the processed data
+   
     final_data_woe.to_csv('CreditScore_save7_whole_data.csv', index=False)
 
-    # User input and Credit Score prediction
+    
     def get_user_input():
         user_data = {}
         user_data['ID'] = float(input("Enter ID: "))
