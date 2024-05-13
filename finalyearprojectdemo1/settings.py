@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'creditscore.apps.CreditscoreConfig'
+    'creditscore.apps.CreditscoreConfig',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [

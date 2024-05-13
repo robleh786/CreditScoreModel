@@ -87,10 +87,10 @@ def RegisterPage(request):
     form = ExtendedUserCreationForm()
     if request.method == "POST":
         form = ExtendedUserCreationForm(request.POST)
-        # i get the form from the user
+        # I get the form from the user
         if form.is_valid():
             user = form.save()  
-            # as i create the user i also have to set their profile details as they'll be an error on the profile page if i dont
+            # As i create the user i also have to set their profile details as they'll be an error on the profile page if i dont
             UserProfile.objects.create(  
                 user=user,
                 bank_balance=0,  
