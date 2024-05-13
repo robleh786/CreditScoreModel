@@ -12,63 +12,72 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='loginpage')
 def creditscore(request):
+    # dfine the requet method, only post will it pass through
     if request.method == 'POST':
         form = CreditCardDataForm(request.POST)
+        # this will error check the form for me 
         if form.is_valid():
-            # Assign form values to user_df from my machine learnig tools
+            
             user_df = {}
+            # pass it all through the model
             for field in form.fields:
                 user_df[field] = form.cleaned_data.get(field)
 
-            # Convert tha user Df into a datafarme first
+            
             user_df = pd.DataFrame([user_df])
 
-            # then use the score card model to predict the credit sccore
+            # used my saved combiner/scocard to predict the score
             credit_score_result = predict_credit_score(user_df, 'CreditScore_save5_ScoreCard.pkl')
 
-            # Extract the credit score value as a single number from the 'CreditScore' column
+            # i only need the credit score, so i extract that 
             credit_score = credit_score_result['CreditScore'].iloc[0]
+            # round it to the nearets intger as it saved like that in the model
             credit_score=round(credit_score)
 
-            # Pass the cleaned, single credit score value to the context to be sent to the template
+           # every thing that i need to dynmaically send to my template will be send through conext dictionary
             context = {
                 'form': form,
-                'credit_score': credit_score  # Now just a number, not a Series or DataFrame
+                'credit_score': credit_score
             }
             return render(request, 'creditscore/result.html', context)
         else:
-            # if there is an error in the forms, pass form errors
+         
             context = {'form': form}
             return render(request, 'creditscore/result.html', context)
     else:
-        # For GET requests, just show the initial form until vald 
+        
         form = CreditCardDataForm()
         context = {'form': form}
         return render(request, 'creditscore/Scoreboard.html', context)
 
 
 def landingpage(request):
+    # just rendering the landing page
     return render(request,'creditscore/LandingPage.html')
 
 
 def loginpage(request):
     if request.method == "POST":
+        # extracting he username and password from the form
         username = request.POST.get('username')
         password = request.POST.get('password')
 
         try:
             user = User.objects.get(username=username)
+            # trying to see if the user's username exists in my DB
         except User.DoesNotExist:
             messages.error(request, 'User does not exist')
             return render(request, "creditscore/loginpage.html")  
 
         user = authenticate(request, username=username, password=password)
+        # this auhenticte will securley cross chekc the username with the corresponding password
 
         if user is not None:
             login(request, user)
             return redirect('home')
         else:
-            messages.error(request, "Incorrect username or password")
+            messages.error(request, "Incorrect password")
+            #if not then the password is clearly wrong
 
     return render(request, "creditscore/loginpage.html")
 
@@ -78,8 +87,10 @@ def RegisterPage(request):
     form = ExtendedUserCreationForm()
     if request.method == "POST":
         form = ExtendedUserCreationForm(request.POST)
+        # i get the form from the user
         if form.is_valid():
             user = form.save()  
+            # as i create the user i also have to set their profile details as they'll be an error on the profile page if i dont
             UserProfile.objects.create(  
                 user=user,
                 bank_balance=0,  
@@ -102,52 +113,58 @@ def save_credit_score(request):
     if request.method == 'POST':
         credit_score = request.POST.get('credit_score')
 
-        # Debug: Check if credit_score is received
+        # first Debug Check if credit_score was received
         if not credit_score:
             messages.error(request, "No credit score received.")
             return render(request, 'creditscore/result.html')
 
         try:
-            # Try converting the credit score to an integer
+            # if it has been received, then convert to intger and save the score
             credit_score = int(credit_score)
-            # Create a new record in the database
+            
             CreditScoreResult.objects.create(user=request.user, Score=credit_score)
             messages.success(request, 'Your credit score has been successfully saved!')
             return redirect('home')  
         except ValueError:
-            # If there's an error in converting the credit score to an integer
+            
             messages.error(request, "Invalid credit score provided.")
             return render(request, 'creditscore/result.html')
 
-    # If it's not a POST request, or other issues
+
     return render(request, 'creditscore/result.html')
 
 
 def aboutpage(request):
+    #render about page
     return render(request,'creditscore/AboutPage.html')
 
 def contactpage(request):
+    # render contact page
     return render(request,'creditscore/ContactPage.html')
 
 @login_required(login_url='loginpage')
 def homepage(request):
+    # render homepage
     return render(request,'creditscore/homePage.html')
 
 
 def logoutuser(request):
+    #this will logout out the user, and the logout function will end their session
     logout(request)
     return redirect('landingpage')
 
 def viewprofile(request):
+    # retrive the corresponding users details
     user = request.user
     user_profile = user.profile
 
-    
+    # on their profile page i let the user see their most recent credit score, so i filter the Db to retreive the 3 most recent
     credit_scores = CreditScoreResult.objects.filter(user=user).order_by('-created')[:3]
 
-   
+    # the i filter once more to extract score from each entry
     recent_scores = [score.Score for score in credit_scores]
 
+    # if ther is less than 3 entrys then fill the rest with Nones
     recent_scores.extend([None] * (3 - len(recent_scores)))
 
     context = {
@@ -162,13 +179,13 @@ def viewprofile(request):
 @login_required(login_url='loginpage')
 def editprofile(request):
     user = request.user
-    profile = user.profile  # Assumes a OneToOne relation exists
+    profile = user.profile  # get user and profile info, knowing they have a 1-1 relationship
 
     if request.method == 'POST':
         user_form = ExtendedUserCreationForm(request.POST, instance=user)
         profile_form = UserProfileForm(request.POST, request.FILES, instance=profile)
         
-        # Extracting the data for the user
+        # Extracting the data from the user
         user.first_name = request.POST.get('first_name')
         user.last_name = request.POST.get('last_name')
         user.email = request.POST.get('email')
@@ -178,12 +195,12 @@ def editprofile(request):
             user.save()
             messages.success(request, 'User information updated successfully!')
         
-        # Checking if the profile form is valid
+        # Check if profile is valid
         if profile_form.is_valid():
             profile_form.save()
             messages.success(request, 'Profile updated successfully!')
             
-        return redirect('view-profile')  # Redirect to the profile view after updating
+        return redirect('view-profile')  # Redirect to the profile view after upadate
 
     else:
         user_form = ExtendedUserCreationForm(instance=user)
@@ -201,9 +218,11 @@ def editprofile(request):
 def editprofileimage(request):
     user = request.user
     profile = user.profile  
+    # get user details and profile info
     
     if request.method == 'POST':
         form = ProfileImageForm(request.POST, request.FILES, instance=profile)
+        # get the details from the form , also since its a picture i have to specify the instance
         if form.is_valid():
             form.save()
             return redirect('view-profile')  
@@ -215,12 +234,15 @@ def editprofileimage(request):
 
 
 def credhist(request):
+    #this will extract all the entries from my database under model creditscroreresult and order them from oldest to newest
     credit_score_results = CreditScoreResult.objects.filter(user=request.user).order_by('created')
-
+    
+    # Convert each 'created' datetime in 'credit_score_results' to a string format 'YYYY-MM-DD' and store them in a list.
     dates = [result.created.strftime('%Y-%m-%d') for result in credit_score_results]
+
     scores = [result.Score for result in credit_score_results]
 
-    # Pass the data to the template
+    
     context = {
         'dates': dates,
         'scores': scores,

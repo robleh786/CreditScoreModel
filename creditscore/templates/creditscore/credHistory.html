@@ -25,7 +25,7 @@
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      max-width: 800px; /* Wider graph container */
+      max-width: 800px; 
       width: 100%;
       margin: 20px;
     }
@@ -37,27 +37,27 @@
     .statistics {
       text-align: center;
       margin-top: 20px;
-      color: #fff; /* Ensure text is visible on the dark background */
-      font-size: 18px; /* Larger font size for visibility */
+      color: #fff; 
+      font-size: 18px; 
       display: flex;
-      justify-content: space-between; /* Space out the lowest and highest score */
+      justify-content: space-between; 
       width: 100%;
-      max-width: 800px; /* Align with the graph width */
-      box-sizing: border-box; /* Include padding in width */
-      padding: 0 20px; /* Padding to not stick to the edges */
+      max-width: 800px; 
+      box-sizing: border-box; 
+      padding: 0 20px; 
     }
 
-    /* Additional styling for the lowest and highest scores */
+    
     .statistics p {
       background: hsl(217, 25%, 35%);
       padding: 10px;
       border-radius: 5px;
     }
     .back-button-container {
-    position: fixed; /* Position relative to the viewport */
-    top: 20px; /* Distance from the top of the viewport */
-    left: 20px; /* Distance from the left of the viewport */
-    z-index: 9999; /* Ensure the button is above other content */
+    position: fixed; 
+    top: 20px; 
+    left: 20px; 
+    z-index: 9999; 
 }
 
 .back-button {
@@ -97,11 +97,11 @@
   const dates = JSON.parse(document.getElementById('dates-data').textContent);
   const scores = JSON.parse(document.getElementById('scores-data').textContent);
 
-  // Calculating the lowest and highest credit score
+  
   const lowestScore = Math.min(...scores);
   const highestScore = Math.max(...scores);
 
-  // Displaying the lowest and highest credit score
+  
   document.getElementById('lowest-score').textContent = `Lowest Credit Score: ${lowestScore}`;
   document.getElementById('highest-score').textContent = `Highest Credit Score: ${highestScore}`;
   
@@ -126,7 +126,7 @@
     options: {
       responsive: true,
       maintainAspectRatio: true,
-      aspectRatio: 2, /* Adjusted for a better fit */
+      aspectRatio: 2, 
       scales: {
         y: {
           beginAtZero: false,
@@ -135,7 +135,7 @@
         },
         x: {
           autoSkip: true,
-          maxTicksLimit: 10 // Adjust the number of ticks on the x-axis as needed
+          maxTicksLimit: 10 
         }
       },
       plugins: {

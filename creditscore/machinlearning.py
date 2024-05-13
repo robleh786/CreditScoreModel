@@ -45,28 +45,32 @@ def calculate_loss_coverage(data, target_level_column):
         coverage = level_subset['label'].value_counts()[0] / data[data.label == 0].shape[0]
         print(f"Level {level}: Loss is {loss:.4f}; Coverage is {coverage:.4f}")
 
-
+#load Data
 data = pd.read_csv('C:\\Users\\roble\\OneDrive\\Documents\\machine learning tests\\UCI_Credit_Card.csv')
+# the label will be used as my tagert to see how likey it it teh user will payback next month
 data['label'] = data['default.payment.next.month']
 data = data.drop(columns=['default.payment.next.month'])
 
-
+# i dont need these
 exclude_list = ['ID', 'label']
 
+# through jupyter notbook tetsing i know th there is 3000 collums so i feel like that this is a fair split
 train = data_split(data, start=0, end=22500, date_col='ID')
 test = data_split(data, start=22500, end=172792, date_col='ID')
 
-
+# Selecting features from the training dataset using Toad's selection tool, filtering out features based on my criteria: retain those with less than 50% missing values ('empty'), an Information Value (IV) above 0.07 for relevance, and a pairwise correlation below 0.9 to reduce multicollinearity.
 train_selected = toad.selection.select(frame=train, target=train['label'], empty=0.5, iv=0.07, corr=0.9, exclude=exclude_list)
 
 
-
+# i Initialised and fit a Toad Combiner to discretise continuous variables using the Chi-squared method with a minimum sample size of 5%.
 combiner = toad.transform.Combiner()
 combiner.fit(X=train_selected, y=train_selected['label'], method='chi', min_samples=0.05, exclude=exclude_list)
+# Excluded specified columns from transformation. The fitted combiner is then serialized and saved to a file for later use.
 pickle.dump(combiner, open('CreditScore_save1_combiner.pkl', 'wb'))
 
-
+# Appling the trained Toad Combiner to the training dataset to transform continuous variables into categorical bins based on the rules above
 train_selected_bin = combiner.transform(train_selected)
+# Then apply the same transformation to the test dataset using only the columns selected during the training phase.
 test_bin = combiner.transform(test[train_selected_bin.columns])
 
 t = toad.transform.WOETransformer()
@@ -173,7 +177,7 @@ else:
 
 
 def get_user_input():
-    # Collect user inputs
+    # Collect all the user inputs
     user_data = {}
     user_data['ID'] = float(input("Enter ID: "))
     user_data['LIMIT_BAL'] = float(input("Enter LIMIT_BAL: "))
@@ -200,7 +204,7 @@ def get_user_input():
     user_data['PAY_AMT5'] = float(input("Enter PAY_AMT5: "))
     user_data['PAY_AMT6'] = float(input("Enter PAY_AMT6: "))
 
-    # Create a DataFrame from user inputs
+    # Creating a DataFrame from all user inputs
     user_df = pd.DataFrame([user_data])
 
     return user_df
@@ -209,20 +213,20 @@ def predict_credit_score(user_df, card_model):
     # Load the saved ScoreCard model
     card = pickle.load(open(card_model, 'rb'))
 
-    # Predict credit score
+    # Predict credit score using the model
     probabilities = card.predict_proba(user_df)
 
-    # Add print statements to debug
+    # just a few debug statments
     print("Dimensions of probabilities:", probabilities.shape if probabilities is not None else None)
     print("user_df columns:", user_df.columns)
 
     # Check if the probabilities are available and non-empty
     if probabilities is not None and len(probabilities) > 0:
-        # Assuming the probabilities are in the second column, change this if needed
+        
         user_df['CreditScore'] = card.predict(user_df)
         user_df['CreditScore_level'] = probabilities[0, 1]
     else:
-        # If probabilities are not available, set 'CreditScore' and 'CreditScore_level' to default values or handle accordingly
+        
         user_df['CreditScore'] = None
         user_df['CreditScore_level'] = None
 

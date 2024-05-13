@@ -5,10 +5,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 
-# Load the data
+
 data = pd.read_csv('C:\\Users\\roble\\OneDrive\\Documents\\machine learning tests\\creditscores - test1.csv')
 
-# Preprocessing steps
+
 exclude_cols = ['ID', 'Customer_ID', 'Month', 'Name', 'SSN', 'Occupation']
 data = data.drop(columns=exclude_cols, errors='ignore')
 numeric_cols = data.select_dtypes(include=['float64', 'int64']).columns
@@ -23,12 +23,12 @@ y = data['credit_score']
 data_subset, _ = train_test_split(data, train_size=0.1, random_state=42)
 numeric_cols_used = data_subset.select_dtypes(include=['float64', 'int64']).columns.difference(['credit_score'])
 
-# Training the model
+
 X_train_sparse, X_test_sparse, y_train, y_test = train_test_split(X_sparse, y, test_size=0.2, random_state=42)
 regression_model = LinearRegression()
 regression_model.fit(X_train_sparse, y_train)
 
-# Function to predict user credit score
+
 def predict_user_credit_score(type_of_loan, payment_behaviour, total_emi_per_month, monthly_inhand_salary,
                               num_bank_accounts, num_credit_cards, interest_rate, num_of_loan, delay_from_due_date,
                               num_of_delayed_payment, changed_credit_limit, num_credit_inquiries, credit_mix,

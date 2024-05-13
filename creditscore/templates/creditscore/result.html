@@ -31,18 +31,18 @@
         width: 30%;
         padding: 20px;
         border-right: 2px solid #ccc;
-        background-color: #0f1f3f; /* Change to match your design */
+        background-color: #0f1f3f; 
         height: auto;
-        align-self: start; /* Align to the top */
+        align-self: start; 
     }
     .credit-score-display {
-        background-color: #24244c; /* Dark blue background */
-        color: #FFFFFF; /* White text */
-        font-size: 108px; /* Large, bold font size */
-        font-weight: bold; /* Bold font weight */
-        padding: 10px; /* Padding around the text */
-        border-radius: 5px; /* Rounded corners */
-        margin-left: 20px; /* Add some space between the gauge and the score */
+        background-color: #24244c; 
+        color: #FFFFFF; 
+        font-size: 108px; 
+        font-weight: bold; 
+        padding: 10px; 
+        border-radius: 5px; 
+        margin-left: 20px; 
     }
   
   
@@ -71,28 +71,28 @@
         margin-bottom: 10px;
         font-weight: bold;
         color: black;
-        position: relative; /* Add position relative for absolute positioning of pseudo-elements */
-        padding-left: 30px; /* Add padding to leave space for the colored indicator */
-        line-height: 1.4; /* Adjust line height for better readability */
-        background-color: #fff; /* Background color */
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle depth effect */
+        position: relative; 
+        padding-left: 30px; 
+        line-height: 1.4; 
+        background-color: #fff; 
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
     }
     .credit-score-range ul li::before {
-        content: ''; /* Required for pseudo-elements to show */
+        content: ''; 
         position: absolute;
         left: 0;
         top: 0;
         bottom: 0;
-        width: 20px; /* Width of the colored box */
-        border-radius: 4px 0 0 4px; /* Rounded corners on the left */
-        z-index: 0; /* Ensure it's behind the text if needed */
+        width: 20px; 
+        border-radius: 4px 0 0 4px; 
+        z-index: 0; 
     }
   
-    .excellent::before { background-color: #4CAF50; } /* Green */
-    .good::before { background-color: #c3f327; } /* Yellow */
-    .fair::before { background-color: #FFC107; } /* Amber */
-    .poor::before { background-color: #FF9800; } /* Orange */
-    .very-poor::before { background-color: #f44336; } /* Red */
+    .excellent::before { background-color: #4CAF50; } 
+    .good::before { background-color: #c3f327; } 
+    .fair::before { background-color: #FFC107; } 
+    .poor::before { background-color: #FF9800; } 
+    .very-poor::before { background-color: #f44336; } 
   
     .credit-check {
         width: 70%;
@@ -121,21 +121,21 @@
         background-color: #43A047;
     }
   
-    /* Color indicators for the credit score ranges */
-    .excellent { border-left-color: #4CAF50; } /* Green */
-    .good { border-left-color: #8BC34A; } /* Light Green */
-    .fair { border-left-color: #FFEB3B; } /* Amber */
-    .poor { border-left-color: #FFC107; } /* Orange */
-    .very-poor { border-left-color: #f44336; } /* Red */
+    
+    .excellent { border-left-color: #4CAF50; } 
+    .good { border-left-color: #8BC34A; } 
+    .fair { border-left-color: #FFEB3B; } 
+    .poor { border-left-color: #FFC107; } 
+    .very-poor { border-left-color: #f44336; } 
   
     #gauge {
-        width: 500px; /* Set a width to make the gauge larger */
-        height: 250px; /* Set a height to make the gauge larger */
+        width: 500px; 
+        height: 250px; 
     }
     .highlight {
-        background-color: #e6ffe6; /* Light green background for highlight */
-        border-left-color: #4CAF50 !important; /* Ensure the border color is green */
-        box-shadow: 0 0 10px #4CAF50; /* Optional: Add a glow or shadow effect */
+        background-color: #e6ffe6; 
+        border-left-color: #4CAF50 !important; 
+        box-shadow: 0 0 10px #4CAF50; 
     }
     .button-container {
         text-align: center;
@@ -144,12 +144,12 @@
   
     .button-container button {
         display: inline-block;
-        padding: 10px 20px; /* Adjust the padding as needed to match your button style */
-        color: white; /* Your button text color */
+        padding: 10px 20px; 
+        color: white; 
         text-align: center;
         text-decoration: none;
-        font-size: 16px; /* Adjust the font size as needed */
-        border-radius: 35px; /* Adjust for the desired border-radius */
+        font-size: 16px; 
+        border-radius: 35px; 
         cursor: pointer;
         transition: background-color 0.3s;
         background-color: rgb(84, 184, 203);
@@ -157,7 +157,7 @@
         padding: 1em 2em;
         font-size: 1.1em;
         cursor: pointer;
-        color: black; /* To ensure the text is readable on the yellow background */
+        color: black; 
 
     }
     .button-container button:hover {
@@ -165,7 +165,7 @@
 
     }
   
-    /* Specific styles for save and back buttons */
+   
     .button-save {
         background-color: #28a745;
         color: #ffffff;
@@ -197,7 +197,7 @@
     }
   
   
-    /* Adjustments for smaller screens */
+    
     @media (max-width: 768px) {
         .dashboard-container {
             flex-direction: column;
@@ -218,7 +218,7 @@
 </style>
 <body>
     <div class="dashboard-container">
-        <!-- Messages display area -->
+        
         {% if messages %}
         <div class="messages">
             {% for message in messages %}
@@ -259,46 +259,46 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Gauge configuration
+            
             var opts = {
-                angle: 0, // The span of the gauge arc
-                lineWidth: 0.28, // The line thickness
-                radiusScale: 1, // Relative radius
+                angle: 0, 
+                lineWidth: 0.28, 
+                radiusScale: 1,
                 pointer: {
-                    length: 0.4, // Relative to gauge radius
-                    strokeWidth: 0.035, // The thickness
-                    color: '#000000' // Fill color
+                    length: 0.4, 
+                    strokeWidth: 0.035, 
+                    color: '#000000' 
                 },
-                limitMax: false, // If false, max value increases automatically if value > maxValue
-                limitMin: false, // If true, the min value of the gauge will be fixed
-                colorStart: '#FF0000', // Red
-                colorStop: '#008000',  // Green
+                limitMax: false, 
+                limitMin: false, 
+                colorStart: '#FF0000', 
+                colorStop: '#008000',  
                 gradientType: 1,
-                strokeColor: '#E0E0E0', // Grey background
+                strokeColor: '#E0E0E0', 
                 generateGradient: true,
                 highDpiSupport: true,
                 staticZones: [
-                    {strokeStyle: "#F03E3E", min: 0, max: 333}, // Red from 1 to 333
-                    {strokeStyle: "#FFDD00", min: 333, max: 666}, // Yellow from 334 to 666
-                    {strokeStyle: "#30B32D", min: 666, max: 1000}  // Green from 667 to 1000
+                    {strokeStyle: "#F03E3E", min: 0, max: 333}, 
+                    {strokeStyle: "#FFDD00", min: 333, max: 666}, 
+                    {strokeStyle: "#30B32D", min: 666, max: 1000}  
                 ],
                 staticLabels: {
-                    font: "10px sans-serif", // Specifies font
-                    labels: [1, 250, 500, 750, 1000], // Print labels at these values
-                    color: "#000000", // Optional: Label text color
-                    fractionDigits: 0 // Optional: Numerical precision. 0=round off.
+                    font: "10px sans-serif",
+                    labels: [1, 250, 500, 750, 1000], 
+                    color: "#000000", 
+                    fractionDigits: 0 
                 }
             };
 
-            // Select the canvas element and create the gauge
-            var target = document.getElementById('gauge'); // Match the ID here
+            
+            var target = document.getElementById('gauge'); 
             var gauge = new Gauge(document.getElementById('gauge')).setOptions(opts);
             gauge.maxValue = 1000;
             gauge.setMinValue(0);
             gauge.animationSpeed = 32;
-            gauge.set("{{ credit_score }}"); // Set the gauge value to the credit score
+            gauge.set("{{ credit_score }}"); 
 
-            // Credit score ranges
+            
             const ranges = {
                 excellent: { min: 720, max: 850 },
                 good: { min: 690, max: 719 },
@@ -307,23 +307,23 @@
                 'very-poor': { min: 300, max: 349 }
             };
 
-            // Function to highlight the credit score range
+            
             function highlightCreditScore(score) {
-                // Remove highlight from all ranges
+                
                 document.querySelectorAll('.credit-score-range ul li').forEach(function(item) {
                     item.classList.remove('highlight');
                 });
 
-                // Find which range the score belongs to
+                
                 let matchedRange = Object.keys(ranges).find(range => score >= ranges[range].min && score <= ranges[range].max);
 
-                // Add highlight to the matched range
+                
                 if (matchedRange) {
                     document.querySelector(`.${matchedRange}`).classList.add('highlight');
                 }
             }
 
-            // Highlight the range for the current score
+            
             highlightCreditScore("{{ credit_score }}");
         });
 
