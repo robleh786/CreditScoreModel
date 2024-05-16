@@ -3,37 +3,32 @@
 <head>
     <meta charset="utf-8">
     <title>Signup</title>
-    <!-- Your CSS link here -->
+   
 </head>
 <body>
-<div class="center">
+  <div class="center">
     <h1>Signup</h1>
     <form method="POST" action="">
         {% csrf_token %}
         <div class="form-container">
-            <div class="form-field">
-                {{ form.username.label_tag }} {{ form.username }}
-            </div>
-            <div class="form-field">
-                {{ form.first_name.label_tag }} {{ form.first_name }}
-            </div>
-            <div class="form-field">
-                {{ form.last_name.label_tag }} {{ form.last_name }}
-            </div>
-            <div class="form-field">
-                {{ form.email.label_tag }} {{ form.email }}
-            </div>
-            <div class="form-field">
-                {{ form.password1.label_tag }} {{ form.password1 }}
-            </div>
-            <div class="form-field">
-                {{ form.password2.label_tag }} {{ form.password2 }}
-            </div>
+            {% for field in form %}
+                <div class="form-field">
+                    {{ field.label_tag }} {{ field }}
+                    {% if field.errors %}
+                        <div class="errorlist">
+                            {% for error in field.errors %}
+                                <p style="color: red;">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
             <input type="submit" value="register">
         </div>
     </form>
     <p><a href="{% url 'loginpage' %}">Already registered?</a></p>
 </div>
+<div class="spacer"></div>
 </body>
 </html>
 
@@ -51,14 +46,19 @@
 
 body {
   background: linear-gradient(#374358, #0b1628);
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0 20px;
 }
 
+.spacer {
+      height: 80px; 
+    }
+
 .center {
+  margin-top: 40px;
   background: rgb(22, 30, 40);
   padding: 20px;
   border-radius: 10px;

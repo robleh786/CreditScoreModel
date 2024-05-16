@@ -1,0 +1,8 @@
+{% load i18n %}
+{% blocktrans %}Hello from {{ current_site }}!{% endblocktrans %}
+
+{% blocktrans %}You're receiving this email because a user account was created on {{ current_site }} using your email address. If this was you, please confirm your email address by clicking the link below:{% endblocktrans %}
+
+{{ activate_url }}
+
+{% blocktrans %}Thank you for using our site!{% endblocktrans %}

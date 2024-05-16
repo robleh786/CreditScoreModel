@@ -42,7 +42,7 @@ class CreditApplicationForm(forms.ModelForm):
         model = CreditApplication
         fields = '__all__'
 
-# here we have to extent the user model,and create the form
+# here i have to extent the user model,and create the form
 class ExtendedUserCreationForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True, help_text='Optional.')
     last_name = forms.CharField(max_length=30, required=True, help_text='Optional.')

@@ -23,7 +23,8 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
     path('',include('creditscore.urls')),
-    path('api/',include('creditscore.api.urls'))
+    path('api/',include('creditscore.api.urls')),
+    path('accounts/', include('allauth.urls')),
 ]
 
 if settings.DEBUG:

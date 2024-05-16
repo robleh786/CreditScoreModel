@@ -87,20 +87,19 @@ def RegisterPage(request):
     form = ExtendedUserCreationForm()
     if request.method == "POST":
         form = ExtendedUserCreationForm(request.POST)
-        # I get the form from the user
         if form.is_valid():
-            user = form.save()  
-            # As i create the user i also have to set their profile details as they'll be an error on the profile page if i dont
-            UserProfile.objects.create(  
+            user = form.save()
+            # Set user profile details
+            UserProfile.objects.create(
                 user=user,
-                bank_balance=0,  
-                current_bank="",  
-                phone_number="",  
-                
+                bank_balance=0,
+                current_bank="",
+                phone_number="",
             )
-            login(request, user)  
-            return redirect('home')
-
+            # Log out the user immediately after registration
+            logout(request)
+            messages.success(request, 'Registration successful. Please check your email to verify your account.')
+            return redirect('loginpage')  # Redirect to login page
     context = {'form': form}
     return render(request, 'creditscore/signUp.html', context)
 
