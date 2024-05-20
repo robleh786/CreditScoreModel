@@ -16,6 +16,15 @@ This is Credit Smart,an online credit based scoring tool that also has credit pa
 
 
 -> Download Toad, via pip install or from https://github.com/topics/toad?l=python if you haven't.Also make sure you have other Ml liabries downloaded like sikit-learn and pickle.There is also a chance that toad may not download, i came across this error and the soloution was that i needed to downlaod a higher version of microsoft tools, done this via downloading c++.
+pip install:
+ django
+ toad
+ sickit learn
+ pickle
+ pandas
+ sk learn
+ matlib
+ math
 
 -> you may also need to go in to the ML files and reroute the csv files as they are currently routed to my computer dictionary, the csv files are with the project.
 
