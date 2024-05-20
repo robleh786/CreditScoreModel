@@ -9,13 +9,13 @@
 <body>
   <style>
     .center h1 {
-      color: white; /* Sets the color of the h1 text to white */
+      color: white; 
     }
     .form-container label {
-      color: white; /* Sets the color of form labels to white */
+      color: white; 
     }
     input[type="submit"] {
-      background-color: #007BFF; /* Example blue color; adjust as needed */
+      background-color: #007BFF; 
       color: white;
       border: none;
       padding: 10px 20px;
@@ -39,7 +39,6 @@
         {% endfor %}
       </div>
     {% endif %}
-    <!-- End of flash messages -->
     <form method="POST" action="">
       {% csrf_token %}
       <div class="form-container">

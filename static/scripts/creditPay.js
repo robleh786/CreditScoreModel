@@ -3,13 +3,11 @@ document.addEventListener('DOMContentLoaded', function() {
     let amountDisplay = document.getElementById('payment-amount-display');
     let cardBalanceInput = document.getElementById('card_balance');
     
-    // Update the display as the slider moves
+   
     rangeInput.addEventListener('input', function() {
         amountDisplay.textContent = `£${this.value}`;
     });
 
-    // Adjust the slider's max value and the displayed repayment amount
-    // when the credit card balance input is changed
     cardBalanceInput.addEventListener('input', function() {
         const balance = parseFloat(this.value) || 0;
         const maxRepayment = Math.max(1000, balance / 10);

@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> <!-- Link to Font Awesome CSS, replace if using a different icon set -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> 
     <style>
         body {
-            background-color: #0d1b31;; /* New background color for the page */
+            background-color: #0d1b31;; 
         }
         .hero {
            
@@ -30,7 +30,7 @@
             background: url("{% static 'images/credit-score.png' %}") no-repeat right center;
             background-size: contain;
             clip-path: ellipse(75% 100% at 100% 50%);
-            height: 400px; /* Adjust as needed */
+            height: 400px; 
         }
         h1 {
             margin-bottom: 0.5em;
@@ -41,7 +41,7 @@
             padding: 1em 2em;
             font-size: 1.1em;
             cursor: pointer;
-            color: black; /* To ensure the text is readable on the yellow background */
+            color: black; 
         }
         button:hover {
             background-color:rgb(84, 184, 203);
@@ -98,9 +98,9 @@
 </head>
 <body>
     <nav class="container-fluid">
-        <!-- Logo on the far left -->
+        
         <img src="{% static 'images/credit-counselling-icon.png' %}" alt="" style="height: 65px;">
-        <!-- Navigation items on the right -->
+        
         <ul>
             <li><a href="{% url 'Scorecard'%}">Get Credit Score</a></li>
             <li><a href="{% url 'creditpay'%}">CreditRepay</a></li>
@@ -138,17 +138,17 @@
         <h2>Why check your score with CreditWise?</h2>
         <div class="grid">
             <div class="card">
-                <i class="fas fa-shield-alt"></i> <!-- Icon for "Won't affect your credit score" -->
+                <i class="fas fa-shield-alt"></i> 
                 <h3>Won't affect your credit score</h3>
                 <p>Come back and check your report as often as you like, it'll never affect your credit score.</p>
             </div>
             <div class="card">
-                <i class="fas fa-gift"></i> <!-- Icon for "It's 100% free, forever" -->
+                <i class="fas fa-gift"></i> 
                 <h3>It's 100% free, forever</h3>
                 <p>Checking your credit score or report with CreditWise won't cost a penny, ever.</p>
             </div>
             <div class="card">
-                <i class="fas fa-graduation-cap"></i> <!-- Icon for "Stay on top of your score" -->
+                <i class="fas fa-graduation-cap"></i> 
                 <h3>Stay on top of your score</h3>
                 <p>See what's going well, and what you could improve on. Plus, get an email if something changes.</p>
             </div>
@@ -161,23 +161,23 @@
     </section>
     <style>
         .container {
-            max-width: 1200px; /* Adjust the max width of the container as needed */
+            max-width: 1200px; 
             margin: auto;
             padding: 2em;
         }
         .grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* Three equal columns */
-            gap: 1em; /* Gap between cards */
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 1em;
         }
         .credit-score-button {
             display: inline-block;
-            padding: 10px 20px; /* Adjust the padding as needed to match your button style */
-            color: white; /* Your button text color */
+            padding: 10px 20px; 
+            color: white;
             text-align: center;
             text-decoration: none;
-            font-size: 16px; /* Adjust the font size as needed */
-            border-radius: 35px; /* Adjust for the desired border-radius */
+            font-size: 16px; 
+            border-radius: 35px; 
             cursor: pointer;
             transition: background-color 0.3s;
             background-color: rgb(84, 184, 203);
@@ -185,7 +185,7 @@
             padding: 1em 2em;
             font-size: 1.1em;
             cursor: pointer;
-            color: rgb(7, 7, 7); /* To ensure the text is readable on the yellow background */
+            color: rgb(7, 7, 7); 
         }
 
         .credit-score-button:hover {
@@ -201,14 +201,14 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: background-color 0.3s; /* Smooth transition for background color */
+            transition: background-color 0.3s; 
         }
         .card:hover {
-            background-color: #a49b9b; /* Darker tone when hovering */
-            cursor: pointer; /* Changes the cursor to signify an interactive element */
+            background-color: #a49b9b; 
+            cursor: pointer; 
         }
         .card i {
-            font-size: 2em; /* Adjust the font size of the icon if needed */
+            font-size: 2em; 
             color: #ff6f61;
             margin-bottom: 0.5em;
         }
@@ -247,11 +247,11 @@
         }
         @media (max-width: 768px) {
             .grid {
-                grid-template-columns: 1fr; /* One column on small screens */
+                grid-template-columns: 1fr; 
             }
             .card {
-                width: 100%; /* Full width on small screens */
-                margin-bottom: 1em; /* Space between cards on small screens */
+                width: 100%; 
+                margin-bottom: 1em; 
             }
         }
     </style>
@@ -330,13 +330,13 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        background-color: #0A192F;; /* Match the background color of the body */
-        color: white; /* Match the color for text from the screenshot */
-        width: 100%; /* Ensure the FAQ takes the full width */
-        padding: 2em 0; /* Add some padding at the top and bottom */
+        background-color: #0A192F;; 
+        color: white; 
+        width: 100%; 
+        padding: 2em 0; 
     }
     .faq-header {
-        font-size: 2.8rem; /* Increased font size for the header */
+        font-size: 2.8rem; 
         font-weight: 600;
         line-height: 1.2;
         font-family: "Barlow Condensed", HelveticaNeue-CondensedBold, "Arial Narrow", Helvetica, Arial, sans-serif;
@@ -345,16 +345,16 @@
         padding-bottom: 0.5em; 
     }
     .faq-content {
-        width: 100%; /* Set the width to match the FAQ section width */
-        max-width: 80%; /* Increased maximum width, adjust as necessary */
-        border-top: 2px solid #ffffff; /* Add top border to FAQ content */
-        padding: 1em; /* Padding inside the content for better readability */
+        width: 100%; 
+        max-width: 80%;
+        border-top: 2px solid #ffffff; 
+        padding: 1em; 
     }
     .faq-question {
         margin: 0.5em 0;
         cursor: pointer;
-        color: white; /* Match the color for text from the screenshot */
-        font-size: 1.2rem; /* Increased font size for the questions */
+        color: white; 
+        font-size: 1.2rem; 
         display: flex;
         justify-content: space-between; 
         width: 100%; 
@@ -369,19 +369,19 @@
     .faq-answer {
         display: none;
         text-align: left;
-        color: white; /* Match the color for text from the screenshot */
-        border-bottom: 1px solid #ffffff; /* Add bottom border to each answer */
-        padding-bottom: 0.5em; /* Space below the answer */
-        font-size: 1rem; /* Adjust font size for the answers */
+        color: white; 
+        border-bottom: 1px solid #ffffff; 
+        padding-bottom: 0.5em; 
+        font-size: 1rem; 
     }
     .faq-question.active::after {
         transform: rotate(-180deg);
     }
 
-    /* Responsive adjustments */
+    
     @media (max-width: 768px) {
         .faq-content {
-            max-width: 100%; /* Full width on small screens */
+            max-width: 100%; 
             padding: 0 1em; 
         }
     }
@@ -444,8 +444,8 @@
             background-color: #0A192F; 
             color: white;
             display: flex;
-            align-items: center; /* Align items vertically */
-            justify-content: space-between; /* Space out the elements */
+            align-items: center; 
+            justify-content: space-between; 
             padding: 3rem 5rem; 
             font-family: 'Open Sans', sans-serif; 
             }
@@ -456,8 +456,8 @@
             }
 
             .footer-logo img {
-                height: 6rem; /* Adjust to fit your logo's size */
-                margin-right: 1rem; /* Space after the logo before the text */
+                height: 6rem; 
+                margin-right: 1rem; 
             }
 
             .footer-contact {
@@ -466,8 +466,8 @@
             }
 
             .footer-contact a, .footer-contact span {
-            margin-right: 3rem; /* Space between contact info items */
-            white-space: nowrap; /* Prevents wrapping */
+            margin-right: 3rem; 
+            white-space: nowrap; 
             }
 
             .footer-links {
@@ -476,7 +476,7 @@
             }
 
             .footer-links a {
-            margin: 0 1rem; /* Space on both sides of the links */
+            margin: 0 1rem; 
             }
 
             .footer-social {
@@ -485,11 +485,11 @@
             }
 
             .footer-social a {
-            margin-left: 2rem; /* Space between social icons */
+            margin-left: 2rem; 
             }
 
             .footer-social i {
-            font-size: 1.5rem; /* Adjust icon size */
+            font-size: 1.5rem;
             }
 
             @media (max-width: 768px) {
@@ -502,18 +502,18 @@
             .footer-contact,
             .footer-links,
             .footer-social {
-                margin: 1rem 0; /* Add margin above and below for mobile */
+                margin: 1rem 0; 
                 flex-direction: column;
                 align-items: center;
             }
 
             .footer-contact a, .footer-contact span,
             .footer-links a {
-                margin: 0.5rem 0; /* Stack contact info and links vertically with space in between */
+                margin: 0.5rem 0; 
             }
 
             .footer-social a {
-                margin: 0.5rem 0; /* Stack social icons vertically with space in between */
+                margin: 0.5rem 0; 
             }
             }
 
@@ -528,13 +528,13 @@
                 flex-direction: column;
             }
             .credit-payback-content i {
-                margin-right: 0; /* Reset the margin for mobile */
-                margin-bottom: 1rem; /* Space below the icon on mobile */
-                font-size: 4rem; /* Smaller icon size on mobile */
+                margin-right: 0; 
+                margin-bottom: 1rem; 
+                font-size: 4rem; 
             }
             .credit-payback-info {
                 max-width: 100%;
-                padding-left: 0; /* Remove padding-left on mobile */
+                padding-left: 0; 
                 text-align: center; 
             }
         }
@@ -547,7 +547,7 @@
         var answer = this.nextElementSibling;
         var isActive = this.classList.contains('active');
         
-        // Close all open answers
+        
         document.querySelectorAll('.faq-answer').forEach(el => el.style.display = 'none');
         document.querySelectorAll('.faq-question').forEach(el => el.classList.remove('active'));
   
@@ -559,11 +559,11 @@
     });
   </script>
   <script>
-    // Get the dropdown and the button
+    
     var dropdown = document.getElementById("dropdownMenu");
     var dropbtn = document.querySelector(".dropbtn");
 
-    // Toggle the dropdown
+   
     dropbtn.onclick = function() {
         dropdown.classList.toggle("show");
     }
