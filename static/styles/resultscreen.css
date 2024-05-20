@@ -20,18 +20,18 @@ body {
     width: 30%;
     padding: 20px;
     border-right: 2px solid #ccc;
-    background-color: #ffffff; /* Change to match your design */
+    background-color: #ffffff; 
     height: auto;
-    align-self: start; /* Align to the top */
+    align-self: start; 
 }
 .credit-score-display {
-    background-color: #00008B; /* Dark blue background */
-    color: #FFFFFF; /* White text */
-    font-size: 108px; /* Large, bold font size */
-    font-weight: bold; /* Bold font weight */
-    padding: 10px; /* Padding around the text */
-    border-radius: 5px; /* Rounded corners */
-    margin-left: 20px; /* Add some space between the gauge and the score */
+    background-color: #00008B; 
+    color: #FFFFFF; 
+    font-size: 108px;
+    font-weight: bold; 
+    padding: 10px; 
+    border-radius: 5px; 
+    margin-left: 20px; 
 }
 
 
@@ -59,28 +59,28 @@ body {
     padding: 12px 10px;
     margin-bottom: 10px;
     font-weight: bold;
-    position: relative; /* Add position relative for absolute positioning of pseudo-elements */
-    padding-left: 30px; /* Add padding to leave space for the colored indicator */
-    line-height: 1.4; /* Adjust line height for better readability */
-    background-color: #fff; /* Background color */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle depth effect */
+    position: relative; 
+    padding-left: 30px; 
+    line-height: 1.4; 
+    background-color: #fff; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
 .credit-score-range ul li::before {
-    content: ''; /* Required for pseudo-elements to show */
+    content: ''; 
     position: absolute;
     left: 0;
     top: 0;
     bottom: 0;
-    width: 20px; /* Width of the colored box */
-    border-radius: 4px 0 0 4px; /* Rounded corners on the left */
-    z-index: 0; /* Ensure it's behind the text if needed */
+    width: 20px; 
+    border-radius: 4px 0 0 4px; 
+    z-index: 0; 
 }
 
-.excellent::before { background-color: #4CAF50; } /* Green */
-.good::before { background-color: #c3f327; } /* Yellow */
-.fair::before { background-color: #FFC107; } /* Amber */
-.poor::before { background-color: #FF9800; } /* Orange */
-.very-poor::before { background-color: #f44336; } /* Red */
+.excellent::before { background-color: #4CAF50; } 
+.good::before { background-color: #c3f327; }
+.fair::before { background-color: #FFC107; } 
+.poor::before { background-color: #FF9800; } 
+.very-poor::before { background-color: #f44336; } 
 
 .credit-check {
     width: 70%;
@@ -109,21 +109,21 @@ button:hover {
     background-color: #43A047;
 }
 
-/* Color indicators for the credit score ranges */
-.excellent { border-left-color: #4CAF50; } /* Green */
-.good { border-left-color: #8BC34A; } /* Light Green */
-.fair { border-left-color: #FFEB3B; } /* Amber */
-.poor { border-left-color: #FFC107; } /* Orange */
-.very-poor { border-left-color: #f44336; } /* Red */
+
+.excellent { border-left-color: #4CAF50; } 
+.good { border-left-color: #8BC34A; } 
+.fair { border-left-color: #FFEB3B; } 
+.poor { border-left-color: #FFC107; } 
+.very-poor { border-left-color: #f44336; } 
 
 #gauge {
-    width: 500px; /* Set a width to make the gauge larger */
-    height: 250px; /* Set a height to make the gauge larger */
+    width: 500px; 
+    height: 250px;
 }
 .highlight {
-    background-color: #e6ffe6; /* Light green background for highlight */
-    border-left-color: #4CAF50 !important; /* Ensure the border color is green */
-    box-shadow: 0 0 10px #4CAF50; /* Optional: Add a glow or shadow effect */
+    background-color: #e6ffe6; 
+    border-left-color: #4CAF50 !important; 
+    box-shadow: 0 0 10px #4CAF50; 
 }
 .button-container {
     text-align: center;
@@ -136,12 +136,12 @@ button:hover {
     border-radius: 5px;
     cursor: pointer;
     padding: 10px 20px;
-    margin: 0 5px; /* Small space between buttons */
+    margin: 0 5px; 
     transition: background-color 0.3s, box-shadow 0.3s;
-    outline: none; /* Remove the outline */
+    outline: none; 
 }
 
-/* Specific styles for save and back buttons */
+
 .button-save {
     background-color: #28a745;
     color: #ffffff;
@@ -155,7 +155,7 @@ button:hover {
 }
 
 
-/* Adjustments for smaller screens */
+
 @media (max-width: 768px) {
     .dashboard-container {
         flex-direction: column;

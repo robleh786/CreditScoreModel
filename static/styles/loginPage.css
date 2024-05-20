@@ -6,17 +6,17 @@
   font-family: "Poppins", sans-serif;
 }
 .flash-messages {
-  text-align: center; /* Center the text */
-  color: red; /* Make the text color red */
-  width: 100%; /* Ensure it spans the full width */
+  text-align: center; 
+  color: red;
+  width: 100%; 
 }
 
 .flash-message {
-  background-color: #ffcccc; /* Light red background */
-  color: red; /* Red text color */
-  margin-bottom: 10px; /* Space between messages */
-  padding: 10px; /* Padding inside messages */
-  border-radius: 5px; /* Optional: rounded corners */
+  background-color: #ffcccc; 
+  color: red; 
+  margin-bottom: 10px; 
+  padding: 10px; 
+  border-radius: 5px; 
 }
 
 body{
@@ -133,32 +133,32 @@ input[type="submit"]:hover{
   border-radius: 5px;
 }
 .form-field {
-  margin-bottom: 15px; /* Space between fields */
+  margin-bottom: 15px; 
 }
 .form-field input {
-  width: 100%; /* Full width of the container */
+  width: 100%; 
   padding: 10px;
-  margin-bottom: 5px; /* Space after the input field */
+  margin-bottom: 5px; 
   border: none;
   border-radius: 5px;
   box-sizing: border-box;
-  background-color: #34495e; /* Slightly lighter than container for contrast */
-  color: #fff; /* White text */
+  background-color: #34495e; 
+  color: #fff; 
 }
 
-/* Reducing the width of input fields */
+
 .form-field input[type='text'],
 .form-field input[type='password'] {
-  max-width: 300px; /* Adjust as needed */
-  display: block; /* Make it a block element */
-  margin: 0 auto; /* Center the field */
+  max-width: 300px; 
+  display: block; 
+  margin: 0 auto; 
 }
 
-/* Style the login button to match the signup button */
+
 input[type="submit"] {
-  max-width: 300px; /* Match input field width */
-  display: block; /* Make it a block element */
-  margin: 20px auto; /* Center the button and add some margin at the top */
+  max-width: 300px; 
+  display: block;
+  margin: 20px auto; 
   background: #2691d9;
   border-radius: 25px;
   font-size: 18px;
@@ -166,6 +166,6 @@ input[type="submit"] {
   font-weight: 700;
   cursor: pointer;
   outline: none;
-  border: none; /* Remove border */
+  border: none; 
   transition: background-color 0.2s;
 }

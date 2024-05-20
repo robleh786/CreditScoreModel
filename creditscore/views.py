@@ -122,7 +122,6 @@ def save_credit_score(request):
             credit_score = int(credit_score)
             
             CreditScoreResult.objects.create(user=request.user, Score=credit_score)
-            messages.success(request, 'Your credit score has been successfully saved!')
             return redirect('home')  
         except ValueError:
             
@@ -231,7 +230,7 @@ def editprofileimage(request):
     context = {'form': form, 'profile': profile}
     return render(request, 'creditscore/editPhoto.html', context)
 
-
+@login_required(login_url='loginpage')
 def credhist(request):
     #this will extract all the entries from my database under model creditscroreresult and order them from oldest to newest
     credit_score_results = CreditScoreResult.objects.filter(user=request.user).order_by('created')
@@ -248,7 +247,7 @@ def credhist(request):
     }
     return render(request, 'creditscore/credHistory.html', context)
 
-
+@login_required(login_url='loginpage')
 def saveloanscore(request):
     if request.method == 'POST':
         loan_score = request.POST.get('loan_score')
@@ -302,3 +301,7 @@ def credit_application_view(request):
         # If not POST, create a new form instance
         form = CreditApplicationForm()
         return render(request, 'creditscore/Test101.html', {'form': form})
+    
+@login_required(login_url='loginpage')
+def indexview(request):
+    return render(request,'creditscore/indexHelp.html')

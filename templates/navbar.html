@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #071747; /* New background color for the page */
+            background-color: #071747; 
         }
         h1 {
             margin-bottom: 0.5em;
@@ -83,14 +83,13 @@
         <ul>
             <li><a href="{% url 'Scorecard'%}">Credit Scoreboard</a></li>
             <li><a href="{% url 'creditpay'%}">CreditRepay</a></li>
-            <li><a href="{% url 'loan-test'%}">Credit M.Score</a></li>
+            <li><a href="{% url 'loan-test'%}">Loan application</a></li>
             <li><a href="{% url 'contact'%}">Contact us</a></li>
             <li class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn">More</a>
                 <div class="dropdown-content" id="dropdownMenu">
                     <a href="{% url 'about'%}">about us</a>
-                    <a href="#">Help</a>
-                    <a href="#">Documentation</a>
+                    <a href="{% url 'view-index' %}">index</a>
                 </div>
             </li>
             <li><a href="{% url 'logout' %}" role="button">Logout</a></li>
@@ -101,16 +100,16 @@
     </nav>
 
     <script>
-        // Get the dropdown and the button
+       
         var dropdown = document.getElementById("dropdownMenu");
         var dropbtn = document.querySelector(".dropbtn");
 
-        // Toggle the dropdown
+      
         dropbtn.onclick = function() {
             dropdown.classList.toggle("show");
         }
 
-        // Close the dropdown if the user clicks outside of it
+        
         window.onclick = function(event) {
             if (!event.target.matches('.dropbtn')) {
                 if (dropdown.classList.contains('show')) {
@@ -119,6 +118,6 @@
             }
         }
     </script>
-    <!-- Further content can go here -->
+   
 </body>
 </html>

@@ -20,6 +20,7 @@ urlpatterns = [
     path('edit-photo', views.editprofileimage, name='edit-photo'),
     path('credit-history', views.credhist, name='credit-history'),
     path('loan-save', views.saveloanscore, name='save-loan'),
+    path('index', views.indexview, name='view-index'),
 
 
 ]

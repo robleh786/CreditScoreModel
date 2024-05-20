@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Smart - Glossary</title>
+    <style>
+        body {
+            background-color: #1c2533;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #ffffff;
+        }
+        .term {
+            background-color: #2a3446;
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .term h2 {
+            margin: 0;
+            color: #00aaff;
+        }
+        .term p {
+            margin: 10px 0 0;
+            color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Credit Smart Glossary</h1>
+        <div class="term">
+            <h2>Credit Mix</h2>
+            <p>The variety of credit types that you have, such as credit cards, mortgages, and car loans. A diverse credit mix can improve your credit score.</p>
+        </div>
+        <div class="term">
+            <h2>EMI (Equated Monthly Installment)</h2>
+            <p>A fixed payment amount made by a borrower to a lender at a specified date each calendar month. EMIs are used to pay off both interest and principal each month so that over a specified number of years, the loan is paid off in full.</p>
+        </div>
+        <div class="term">
+            <h2>Credit Utilization Ratio</h2>
+            <p>The ratio of your current total debt to your total available credit. This ratio helps determine your credit score and is a key indicator of your credit health.</p>
+        </div>
+        <div class="term">
+            <h2>RePayment status</h2>
+            <p>Repayment status indicates if a user paid their credit card bill on time or with a delay. Recorded monthly (PAY_0 to PAY_6), values range from -1 (paid on time) to 9 (nine or more months overdue). This helps assess creditworthiness.</p>
+        </div>
+        <div class="term">
+            <h2>Bill amount</h2>
+            <p>The BILL_AMT variables represent the billed amount on a client's credit card statement for six consecutive months. The values, recorded as BILL_AMT1 to BILL_AMT6, show the outstanding balance on the card at the end of each month. This helps evaluate the client's credit usage and financial behavior.</p>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}
