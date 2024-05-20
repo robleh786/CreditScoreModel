@@ -37,11 +37,30 @@ class CreditCardDataForm(ModelForm):
     MARRIAGE = forms.ChoiceField(choices=MARRIAGE_CHOICES, widget=forms.Select(attrs={'class': 'form-control'}))
 
 
+
 class CreditApplicationForm(forms.ModelForm):
     class Meta:
         model = CreditApplication
         fields = '__all__'
 
+   
+    TYPE_OF_LOAN_CHOICES = [
+        ('Auto Loan', 'Auto Loan'),
+        ('Credit-Builder Loan', 'Credit-Builder Loan'),
+        ('Personal Loan', 'Personal Loan'),
+        ('Home Equity Loan', 'Home Equity Loan'),
+    ]
+
+   
+    PAYMENT_BEHAVIOUR_CHOICES = [
+        ('High_spent_Medium_value_payments', 'High purchase with medium monthly payments'),
+        ('High_spent_Large_value_payments', 'High purchase with Larg monthly payments'),
+        ('Low_spent_Medium_value_payments', 'Low purchase with medium monthly payments'),
+        ('Low_spent_Large_value_payments', 'Lows purchase with Large monthly payments'),
+    ]
+
+    type_of_loan = forms.ChoiceField(choices=TYPE_OF_LOAN_CHOICES, widget=forms.Select(attrs={'class': 'form-control'}))
+    payment_behaviour = forms.ChoiceField(choices=PAYMENT_BEHAVIOUR_CHOICES, widget=forms.Select(attrs={'class': 'form-control'}))
 # here i have to extent the user model,and create the form
 class ExtendedUserCreationForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True, help_text='Optional.')

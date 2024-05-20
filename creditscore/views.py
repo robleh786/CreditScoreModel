@@ -293,6 +293,7 @@ def credit_application_view(request):
             )
 
             # Pass the credit score to the template for display
+            credit_score=round(credit_score)
             return render(request, 'creditscore/result2.html', {'credit_score': credit_score})
         else:
             # Return the form with errors
