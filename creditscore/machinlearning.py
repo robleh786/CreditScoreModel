@@ -109,7 +109,7 @@ card = toad.ScoreCard(
     transer=t,
     class_weight='balanced',
     C=0.1,
-    base_score=1000,
+    base_score=999,
     base_odds=35,
     pdo=80,
     rate=2
@@ -167,7 +167,7 @@ if 'CreditScore' in final_data_woe.columns:
         user_df['CreditScore_level'] = card.predict_proba(user_df)[:, 1]
         return user_df
 
-    # Example usage
+
     user_input = get_user_input()
     credit_score_result = predict_credit_score(user_input, 'CreditScore_save5_ScoreCard.pkl')
 
