@@ -33,7 +33,7 @@ pip install:
 2. Main user CREDENTIALS:  
 
 - username: robleh
-- password: Looser786.
+- password: tester101
 
 
 <!------------------------------------ END OF INSTALLATION AND DATABASE STRUCTURE --------------------------->
